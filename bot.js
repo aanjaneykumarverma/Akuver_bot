@@ -27,5 +27,24 @@ for (const file of eventFiles){
 
 }
 client.login(config.token);
-var http = require('http');  
+var http = require('http'); 
+var request = require('request');
 http.createServer(function (req, res) {     res.writeHead(200, {'Content-Type': 'text/plain'});     res.send('it is running\n'); }).listen(process.env.PORT || PORT);
+
+const time=29*60*1000;
+var requestLoop = setInterval(function(){
+  request({
+      url: "http://www.google.com",
+      method: "GET",
+      timeout: 10000,
+      followRedirect: true,
+      maxRedirects: 10
+  },function(error, response, body){
+      if(!error && response.statusCode == 200){
+          console.log('success!');
+      }else{
+          console.log('error' + response.statusCode);
+      }
+  });
+}, time);
+//clearInterval(requestLoop);
