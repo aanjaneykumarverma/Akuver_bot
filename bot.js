@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const config = require('./config.json');
 const client = new Discord.Client();
+const PORT = 3000;
 client.commands = new Discord.Collection();
 
 const commandFolders = fs.readdirSync('./commands');
@@ -26,3 +27,6 @@ for (const file of eventFiles){
 
 }
 client.login(config.token);
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});
