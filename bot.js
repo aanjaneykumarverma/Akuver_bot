@@ -1,8 +1,8 @@
-require("dotenv").config(); // needed for local testing only, when deployed on server line 28 can execute itself
+//require("dotenv").config(); // needed for local testing only, when deployed on server line 28 can execute itself
 
 const Discord = require('discord.js');
 const fs = require('fs');
-
+const config = require('./config.json');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
@@ -25,4 +25,4 @@ for (const file of eventFiles){
   }
 
 }
-client.login(process.env.BOTTOKEN);
+client.login(config.token);
