@@ -27,5 +27,5 @@ for (const file of eventFiles){
 
 }
 client.login(config.token);
-ar http = require('http');  
+var http = require('http');  
 http.createServer(function (req, res) {     res.writeHead(200, {'Content-Type': 'text/plain'});     res.send('it is running\n'); }).listen(process.env.PORT || PORT);
