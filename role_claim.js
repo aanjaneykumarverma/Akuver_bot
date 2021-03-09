@@ -3,19 +3,17 @@ const firstMsg = require('./first_msg.js');
 module.exports = (client) => {
   const channelId = '815477746310184962';
   const botId = '815474132182368256';
-  const getEmoji = (emojiName) => client.emojis.cache.find((emoji) => emoji.name === emojiName);
 
   const emojis = {
-    'like': 'Like',
-    'dislike': 'Dislike',
+    '🤖': 'Like',
+    '🦸': 'Dislike',
   }
 
   const reactions = [];
   let emojiText = 'Add a reaction to claim a role\n';
-  for (const key in emojis){
-    const emoji = getEmoji(key);
+  for (const emoji in emojis){
     reactions.push(emoji);
-    const role = emojis[key];
+    const role = emojis[emoji];
     emojiText += `${emoji} = ${role}\n`;
   }
 
