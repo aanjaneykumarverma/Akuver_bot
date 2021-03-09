@@ -1,7 +1,7 @@
 const {prefix}=require('../config.json');
 const Discord = require('discord.js');
 const cooldowns = new Discord.Collection();
-module.exports={
+module.exports = {
   name: 'message',
   execute(message){
     if(!message.content.startsWith(prefix) || message.author.bot) return;
