@@ -1,9 +1,14 @@
 const {prefix}=require('../config.json');
 const Discord = require('discord.js');
 const cooldowns = new Discord.Collection();
+const mongo = require('../mongo.js');
+const profileSchema = require('../schemas/profile-schema.js');
 module.exports = {
   name: 'message',
   execute(message){
+    const {guild, member} = message;
+    const xpToAdd = Math.floor(Math.random()*11);
+    addXP(guild.id, member.id, xpToAdd, message);
     if(!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/);   // trim removes whitespaces from both sides of string
     const commandName = args.shift().toLowerCase();
@@ -36,3 +41,41 @@ module.exports = {
     }
   },
 };
+
+const getNeededXP = (level) => level*level*100;
+const addXP = async (guildId, userId, xpToAdd, message) => {
+  if(message.author.bot) return;
+  await mongo().then(async (mongoose) => {
+    try{
+      const result = await profileSchema.findOneAndUpdate({
+        guildId,
+        userId,
+      },{
+        guildId,
+        userId,
+        $inc: {
+          xp: xpToAdd,
+        },
+      },{
+        upsert: true,                 //update+insert
+        new: true,                    // return the updated value; not the old one.
+      });
+  let {xp, level} = result;
+  const needed = getNeededXP(level);
+  if(xp>=needed){
+    level++;
+    xp -= needed;
+    message.reply(`Congrats for advancing to level ${level}.`);
+    await profileSchema.updateOne({
+      guildId,
+      userId,
+    },{
+      level,
+      xp,
+    })}
+  } finally{
+    mongoose.connection.close();
+  }
+  })
+}
+module.exports.addXP = addXP;
