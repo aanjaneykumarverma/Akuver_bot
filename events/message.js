@@ -1,7 +1,7 @@
 const {prefix}=require('../config.json');
 const Discord = require('discord.js');
 const cooldowns = new Discord.Collection();
-const mongo = require('../mongo.js');
+const mongo = require('../util/mongo.js');
 const profileSchema = require('../schemas/profile-schema.js');
 module.exports = {
   name: 'message',

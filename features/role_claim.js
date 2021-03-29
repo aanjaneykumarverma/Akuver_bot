@@ -1,12 +1,11 @@
-const firstMsg = require('./first_msg.js');
+const firstMsg = require('../util/first_msg.js');
 
 module.exports = (client) => {
-  const channelId = '815477746310184962';
+  const channelId = '826000469800517713';
   const botId = '815474132182368256';
 
   const emojis = {
-    '🤖': 'Like',
-    '🦸': 'Dislike',
+    '🔒': 'Verified',
   }
 
   const reactions = [];

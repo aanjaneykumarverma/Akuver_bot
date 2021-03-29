@@ -9,15 +9,16 @@ const addReactions = (message, reactions) => {
 
 module.exports = async(client, id, text, reactions=[]) => {
   const channel = await client.channels.fetch(id);
-
   channel.messages.fetch().then((messages)=>{
     if(messages.size === 0){                  // no first msg, so send one
       channel.send(text).then((message)=>{
+        if(reactions.length)
         addReactions(message,reactions);
       })
     } else{
         for(const message of messages){
           message[1].edit(text);
+          if(reactions.length)
           addReactions(message[1],reactions);
         }
     }

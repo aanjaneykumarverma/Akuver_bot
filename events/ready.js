@@ -1,5 +1,6 @@
-const roleclaim = require('../role_claim.js');
-const mongo = require('../mongo.js');
+const roleclaim = require('../features/role_claim.js');
+const rules = require('../features/rules_and_info.js');
+const mongo = require('../util/mongo.js');
 module.exports={
     name: 'ready',
     once: true,
@@ -13,5 +14,6 @@ module.exports={
         }
       });
       roleclaim(client);
+      rules(client);
     }
 };
