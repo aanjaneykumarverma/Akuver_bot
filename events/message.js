@@ -6,14 +6,14 @@ const profileSchema = require('../schemas/profile-schema.js');
 module.exports = {
   name: 'message',
   execute(message){
-    const {guild, member} = message;
+    const {guild, member, channel} = message;
     const xpToAdd = Math.floor(Math.random()*11);
     addXP(guild.id, member.id, xpToAdd, message);
     if(!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/);   // trim removes whitespaces from both sides of string
     const commandName = args.shift().toLowerCase();
     const client = message.client;
-    if(!client.commands.has(commandName)) {
+    if(!client.commands.has(commandName) && channel.name!=='testing') {
       message.reply("Invalid commnand. Send !help to get a list of all possible commands.");
       return;
     }
