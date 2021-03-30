@@ -20,6 +20,10 @@ module.exports = {
       return;
     }
     const command = client.commands.get(commandName);
+    if(command.guildOnly && message.channel.type === 'dm' ){
+      message.reply(`I can't execute that command inside DMs!`);
+      return;
+    }
     if(command.permissions){
       const authorPerms = message.channel.permissionsFor(message.author);
       if(!authorPerms || !authorPerms.has(command.permissions)){
