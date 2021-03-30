@@ -8,7 +8,9 @@ module.exports = {
   execute(message){
     const {guild, member, channel} = message;
     const xpToAdd = Math.floor(Math.random()*11);
-    addXP(guild.id, member.id, xpToAdd, message);
+    if(channel.type !=='dm') {
+      addXP(guild.id, member.id, xpToAdd, message);
+    }
     if(!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/);   // trim removes whitespaces from both sides of string
     const commandName = args.shift().toLowerCase();
