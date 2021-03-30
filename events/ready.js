@@ -1,6 +1,6 @@
-const roleclaim = require('../features/role_claim.js');
-const rules = require('../features/rules_and_info.js');
 const mongo = require('../util/mongo.js');
+const fs = require('fs');
+const featuresFiles = fs.readdirSync('./features').filter(file => file.endsWith('.js'));
 module.exports={
     name: 'ready',
     once: true,
@@ -13,7 +13,9 @@ module.exports={
           mongoose.connection.close();
         }
       });
-      roleclaim(client);
-      rules(client);
+      for(const file of featuresFiles){
+        const feature = require(`../features/${file}`);
+        feature(client);
+      }
     }
 };
