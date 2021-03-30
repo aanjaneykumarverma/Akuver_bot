@@ -4,6 +4,7 @@ module.exports = {
   name: 'help',
   description: 'lists all valid commands with their usage.',
   usage: '[command name]',
+  permissions: ' ',
   cooldown: 5,
   execute(message,args){
     const data = [];

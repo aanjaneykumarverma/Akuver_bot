@@ -10,6 +10,7 @@ module.exports = {
   name: 'joke',
   description: 'Shares a joke.',
   usage: ' ',
+  permissions: ' ',
   async execute (message,args){
       const Joke = await fetch(`${baseURL}/joke/${categories.join(",")}?${params.join("&")}`).then(response => response.json());
       if(Joke.type == "single"){
