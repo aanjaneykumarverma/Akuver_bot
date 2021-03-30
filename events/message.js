@@ -18,6 +18,13 @@ module.exports = {
       return;
     }
     const command = client.commands.get(commandName);
+    if(command.permissions){
+      const authorPerms = message.channel.permissionsFor(message.author);
+      if(!authorPerms || !authorPerms.has(command.permissions)){
+        message.reply(`You don't have the permission to do this!`);
+        return;
+      }
+    }
     if(!cooldowns.has(command.name)){
       cooldowns.set(command.name,new Discord.Collection());
     }
