@@ -10,7 +10,7 @@ module.exports = {
     const {commands} = message.client;
     if(!args.length){
       data.push("Here is a list of all of my commands: ");
-      data.push(commands.map(command => command.name).join(', '));
+      data.push(`\`${commands.map(command => command.name).join(', ')}\``);
       data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
 
       return message.author.send(data, {split:true}).then(()=>{                     // splits msgs into 2 or more if charlength>2000
