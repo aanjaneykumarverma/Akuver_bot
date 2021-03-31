@@ -3,7 +3,7 @@ const {version} = require('../../package.json');
 module.exports = {
   name: 'userinfo',
   description: 'Displays information about the user.',
-  usage: ' ',
+  usage: '[member_name_optional]',
   guildOnly: true,
   execute(message){
     const {guild, channel} = message;
