@@ -5,17 +5,16 @@ const reqString = {
   required: true,
 };
 
+const defNumber = {
+  type: Number,
+  default: 0,
+};
 const profileSchema = mongoose.Schema({
   guildId: reqString,
   userId: reqString,
-  xp:{
-    type: Number,
-    default: 0,
-  },
-  level:{
-    type: Number,
-    default: 0,
-  },
+  xp: defNumber,
+  level: defNumber,
+  coins: defNumber,
 });
 
 module.exports = mongoose.model('profiles', profileSchema)    // profiles is the table name

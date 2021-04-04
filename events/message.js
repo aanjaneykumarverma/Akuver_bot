@@ -3,13 +3,17 @@ const Discord = require('discord.js');
 const cooldowns = new Discord.Collection();
 const mongo = require('../util/mongo.js');
 const profileSchema = require('../schemas/profile-schema.js');
+const currency = require('../features/currency.js');
+
 module.exports = {
   name: 'message',
   execute(message){
     const {guild, member, channel} = message;
     const xpToAdd = Math.floor(Math.random()*11);
+    const coinsToAdd = Math.floor(Math.random()*6);
     if(channel.type !=='dm') {
       addXP(guild.id, member.id, xpToAdd, message);
+      currency.addCoins(guild.id,member.id, coinsToAdd);
     }
     if(!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/);   // trim removes whitespaces from both sides of string
