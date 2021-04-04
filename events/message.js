@@ -13,7 +13,7 @@ module.exports = {
     const coinsToAdd = Math.floor(Math.random()*6);
     if(channel.type !=='dm') {
       addXP(guild.id, member.id, xpToAdd, message);
-      currency.addCoins(guild.id,member.id, coinsToAdd);
+      //currency.addCoins(guild.id,member.id, coinsToAdd);
     }
     if(!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/);   // trim removes whitespaces from both sides of string
