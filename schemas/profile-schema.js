@@ -14,7 +14,10 @@ const profileSchema = mongoose.Schema({
   userId: reqString,
   xp: defNumber,
   level: defNumber,
-  coins: defNumber,
+  coins: {
+    type: Number,
+    required: true,
+  }
 });
 
 module.exports = mongoose.model('profiles', profileSchema)    // profiles is the table name

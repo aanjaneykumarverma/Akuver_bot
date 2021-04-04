@@ -40,7 +40,18 @@ module.exports.getCoins = async(guildId, userId) => {
         guildId,
         userId,
       });
-      return result.coins;
+      let coins = 0;
+      if(result){
+        coins = result.coins;
+      } else{
+        await new profileSchema({
+          guildId: guildId,
+          userId: userId,
+          coins: coins,
+        }).save();
+      }
+      coinsCache[`${guildId}-${userId}`] = coins;
+      return coins;
     } finally{
       mongoose.connection.close();
     }
