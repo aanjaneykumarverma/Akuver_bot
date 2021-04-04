@@ -22,9 +22,8 @@ module.exports.addCoins = async (guildId, userId, coins) => {
         new: true,
       }).then((result)=>{
         coinsCache[`${guildId}-${userId}`] = result.coins;
-        mongoose.connection.close();
         return result.coins;
-      });
+      }).then(()=>mongoose.connection.close());
     } catch(err){
       console.log(err);
     }
@@ -53,9 +52,8 @@ module.exports.getCoins = async(guildId, userId) => {
           }).save();
         }
         coinsCache[`${guildId}-${userId}`] = coins;
-        mongoose.collection().close();
         return coins;
-      });
+      }).then(()=>mongoose.connection.close());
     } catch (err){
       console.log(err);
     }
@@ -68,9 +66,8 @@ module.exports.sort = async(guildId,max) => {
         await profileSchema.find()
        .sort({'coins':'desc'})
        .limit(max).then((response)=>{
-         mongoose.connection.close();
          return response;
-       });
+       }).then(()=>mongoose.connection.close());
    }catch(err){
       console.log(err);
     }
