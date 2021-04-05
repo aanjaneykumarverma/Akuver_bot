@@ -7,13 +7,13 @@ const currency = require('../features/currency.js');
 
 module.exports = {
   name: 'message',
-  execute(message){
+  async execute(message){
     const {guild, member, channel} = message;
     const xpToAdd = Math.floor(Math.random()*11);
     const coinsToAdd = Math.floor(Math.random()*6);
     if(channel.type !=='dm') {
       addXP(guild.id, member.id, xpToAdd, message);
-      //currency.addCoins(guild.id,member.id, coinsToAdd);
+      await currency.addCoins(guild.id,member.id, coinsToAdd);
     }
     if(!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/);   // trim removes whitespaces from both sides of string
