@@ -7,7 +7,8 @@ module.exports = {
   cooldown: 10,
   guildOnly: true,
   async execute(message,args){
-    const currentAmount = currency.getCoins(message.guild.id, message.author.id);
+    const currentAmount = await currency.getCoins(message.guild.id, message.author.id);
+    console.log(currentAmount);
     const transferAmount = args[0];
     const transferTarget = message.mentions.users.first();
     if(!transferAmount || isNaN(transferAmount)) {
@@ -22,8 +23,8 @@ module.exports = {
     if (transferAmount <= 0) {
       return message.channel.send(`Please enter an amount greater than zero, ${message.author}.`);
     }
-    currency.addCoins(message.guild.id, message.author.id, -transferAmount);
-    currency.addCoins(message.guild.id, transferTarget.id, transferAmount);
+    await currency.addCoins(message.guild.id, message.author.id, -transferAmount);
+    await currency.addCoins(message.guild.id, transferTarget.id, transferAmount);
     return message.channel.send(`Successfully transferred ${transferAmount}💰 to ${transferTarget.tag}.`);
   },
 };
