@@ -8,7 +8,6 @@ module.exports = {
   guildOnly: true,
   async execute(message,args){
     const currentAmount = await currency.getCoins(message.guild.id, message.author.id);
-    console.log(currentAmount);
     const transferAmount = args[0];
     const transferTarget = message.mentions.users.first();
     if(!transferAmount || isNaN(transferAmount)) {
