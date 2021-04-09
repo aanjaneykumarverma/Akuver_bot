@@ -36,15 +36,17 @@ module.exports = {
       const previousMutes = await muteSchema.find({
         userId: target.id
       });
+      console.log(previousMutes);
       const currentlyMuted = previousMutes.filter(mute => {
         return mute.current === true;
       });
+      console.log(currentlyMuted);
       if(currentlyMuted.length){
         message.reply('That user is already muted.');
         mongoose.connection.close();
         return;
       }
-      let duration = reasons[reason] * (previousMutes + 1);
+      let duration = reasons[reason] * (previousMutes.length + 1);
       const expires = new Date();
       expires.setHours(expires.getHours() + duration);
       const mutedRole = guild.roles.cache.find(role =>{

@@ -11,7 +11,10 @@ const muteSchema = mongoose.Schema({
   reason: reqString,
   staffId: reqString,
   staffTag: reqString,
-  curRoles: reqString,
+  curRoles: {
+    type: String,
+    default: '',
+  },
   expires: {
     type: Date,
     required: true,
