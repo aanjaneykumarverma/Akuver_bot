@@ -49,7 +49,7 @@ module.exports = {
           }
           guildMember.roles.remove(mutedRole);
         }
-        message.reply(`You unmuted <@${id}>`);
+        message.reply(`You unmuted <@${id}>.`);
       } else{
           message.reply('That user is not muted.');
       }
