@@ -48,7 +48,7 @@ module.exports = {
     }
     const validTimeZones = momentTimezone.tz.names();
     if(!validTimeZones.includes(timeZone)){
-      message.reply('Unknown timezone! Please choose a valid one.');
+      message.reply('Unknown timezone! Please choose a valid one from <https://github.com/Akuver/Akuver_bot/blob/main/util/timezones.txt>');
       return;
     }
     const targetDate = momentTimezone.tz(
