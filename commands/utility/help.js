@@ -9,11 +9,32 @@ module.exports = {
     const data = [];
     const {commands} = message.client;
     if(!args.length){
-      data.push("Here is a list of all of my commands: ");
-      data.push(`\`${commands.map(command => command.name).join(', ')}\``);
+      data.push('Here is a list of all of my commands:\n');
+      for (let command of commands){
+        command = command[1];
+        let permissions = command.permissions;
+        if(permissions){
+          let hasPermission = true;
+          if(typeof permissions === 'string'){
+            permissions = [permissions];
+          }
+          for(const permission of permissions) {
+            if(!message.member.hasPermission(permission)){
+              hasPermission = false;
+              break;
+            }
+          }
+          if(!hasPermission){
+            continue;
+          }
+        }
+        const mainCommand = command.name;
+        const usage = command.usage ? `${command.usage}`: '';
+        const {description} = command;
+        data.push(`${prefix}${mainCommand}${usage} = ${description}\n`);
+      }
       data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
-
-      return message.author.send(data, {split:true}).then(()=>{                     // splits msgs into 2 or more if charlength>2000
+      return message.author.send(data, {split:true, code:true}).then(()=>{                     // splits msgs into 2 or more if charlength>2000
         if(message.channel.type=='dm') return;
         message.reply('I\'ve sent you a DM with all my commands.');
       })
@@ -22,6 +43,7 @@ module.exports = {
         message.reply('it seems destiny doesn\'t want me to DM you.');
       })
     }
+
     const name = args[0].toLowerCase();
     const command = message.client.commands.get(name);
     if(!command){
