@@ -55,20 +55,28 @@ module.exports = {
         mongoose.connection.close();
         return;
       }
-
       const targetMember = (await guild.members.fetch()).get(target.id);
+      let curRoles = '';
+      guild.roles.cache.find(role => {
+        if(role.name !== 'Muted' &&  role.name !=='@everyone' && targetMember.roles.cache.has(role.id)) {
+          curRoles+=`${role.name} ,`;
+          targetMember.roles.remove(role);
+        }
+      });
+      curRoles = curRoles.substr(0, curRoles.length - 2);
       targetMember.roles.add(mutedRole);
-
       await new muteSchema({
         userId: target.id,
         guildId: guild.id,
         reason,
         staffId: staff.id,
         staffTag: staff.username,
+        curRoles,
         expires,
         current: true,
       }).save();
       mongoose.connection.close();
+
       message.reply(`You muted <@${target.id}> for "${reason}". They will be unmuted in ${duration} hours.`);
   },
 };
