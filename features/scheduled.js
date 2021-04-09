@@ -1,4 +1,3 @@
-const mongo = require('../util/mongo.js');
 const scheduledSchema = require('../schemas/scheduled-schema.js');
 
 module.exports = (client) => {
@@ -8,7 +7,6 @@ module.exports = (client) => {
         $lte: Date.now(),
       },
     }
-    const mongoose = await mongo();
     const results = await scheduledSchema.find(query);
     for(const post of results){
       const {guildId, channelId, content} = post;
@@ -24,7 +22,6 @@ module.exports = (client) => {
     }
     await scheduledSchema.deleteMany(query);
     setTimeout(checkForPosts, 1000*10);
-    mongoose.connection.close();
   }
   checkForPosts();
 };
