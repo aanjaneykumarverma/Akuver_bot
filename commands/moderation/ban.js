@@ -2,7 +2,7 @@ module.exports = {
   name: 'ban',
   description: 'Bans the specified user from the server.',
   usage: '[@user_id]',
-  permissions: 'ADMINISTRATOR',
+  permissions: 'ADMINISTRATOR,BAN_MEMBERS',
   guildOnly: true,
   execute(message,args){
       const {member, mentions} = message;

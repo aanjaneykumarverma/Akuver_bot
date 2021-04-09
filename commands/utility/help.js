@@ -16,8 +16,9 @@ module.exports = {
         if(permissions){
           let hasPermission = true;
           if(typeof permissions === 'string'){
-            permissions = [permissions];
+            permissions = permissions.split(',');
           }
+          console.log(permissions);
           for(const permission of permissions) {
             if(!message.member.hasPermission(permission)){
               hasPermission = false;

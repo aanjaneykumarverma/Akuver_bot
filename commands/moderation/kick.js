@@ -2,7 +2,7 @@ module.exports = {
   name: 'kick',
   description: 'Kicks the specified user from the server.',
   usage: '[@user_id]',
-  permissions: 'ADMINISTRATOR',
+  permissions: 'ADMINISTRATOR,KICK_MEMBERS',
   guildOnly: true,
   execute(message,args){
       const {member, mentions} = message;
