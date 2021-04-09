@@ -12,7 +12,7 @@ module.exports = {
       data.push('Here is a list of all of my commands:\n');
       for (let command of commands){
         command = command[1];
-        let permissions = command.permissions;
+        let permissions = command.permissions || '';
         if(permissions){
           let hasPermission = true;
           if(typeof permissions === 'string'){
