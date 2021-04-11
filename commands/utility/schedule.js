@@ -1,6 +1,7 @@
 const momentTimezone = require('moment-timezone');
 const {MessageCollector} = require('discord.js');
 const scheduledSchema = require('../../schemas/scheduled-schema.js');
+const mongo = require('../../util/mongo.js');
 const checkForPosts = require('../../features/scheduled.js');
 let on = 0;
 module.exports = {
@@ -52,12 +53,14 @@ module.exports = {
         return;
       }
       message.reply('Your message has been scheduled.');
+      const mongoose = await mongo();
       await new scheduledSchema({
         date: targetDate.format(),
         content: collectedMessage.content,
         guildId: guild.id,
         channelId: targetChannel.id,
       }).save();
+      mongoose.connection.close();
     })
   },
 };

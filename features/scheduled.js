@@ -1,10 +1,12 @@
 const scheduledSchema = require('../schemas/scheduled-schema.js');
+const mongo = require('../util/mongo.js');
 const checkForPosts = async () => {
   const query = {
     date: {
       $lte: Date.now(),
     },
   }
+  const mongoose = await mongo();
   const results = await scheduledSchema.find(query);
   for(const post of results){
     const {guildId, channelId, content} = post;
@@ -21,6 +23,7 @@ const checkForPosts = async () => {
   console.log('hola');
   await scheduledSchema.deleteMany(query);
   setTimeout(checkForPosts, 1000*1);
+  mongoose.connection.close();
 };
 module.exports = (client) => {};
 
