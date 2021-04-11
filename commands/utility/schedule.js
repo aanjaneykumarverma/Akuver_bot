@@ -47,7 +47,7 @@ module.exports = {
         return;
       }
       await new scheduledSchema({
-        date: targetDate.format(),
+        date: targetDate.valueOf(),
         content: collectedMessage.content,
         guildId: guild.id,
         channelId: targetChannel.id,

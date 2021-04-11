@@ -6,7 +6,7 @@ const reqString = {
 
 const scheduledSchema = new mongoose.Schema({
   date: {
-    type: Date,
+    type: Number,
     required: true,
   },
   content: reqString,
