@@ -23,6 +23,8 @@ module.exports = async (client) => {
           }
           channel.send(content);
         }
+      }catch(err){
+        console.log(err);
       }finally{
         mongoose.connection.close();
       }

@@ -46,12 +46,13 @@ module.exports = {
         message.reply('You did not reply in time.');
         return;
       }
-      await new scheduledSchema({
+      const result = await new scheduledSchema({
         date: targetDate.valueOf(),
         content: collectedMessage.content,
         guildId: guild.id,
         channelId: targetChannel.id,
       }).save();
+      console.log(result);
       message.reply('Your message has been scheduled.');
     });
   },
