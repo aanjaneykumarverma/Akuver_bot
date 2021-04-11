@@ -46,22 +46,12 @@ module.exports = {
         message.reply('You did not reply in time.');
         return;
       }
-      await mongo().then(async (mongoose)=>{
-        try{
-          console.log('Inserting a scheduled msg.');
-          await scheduledSchema.create({
-            date: targetDate.format(),
-            content: collectedMessage.content,
-            guildId: guild.id,
-            channelId: targetChannel.id,
-          });
-        } catch(err){
-          console.log(err,"ERROR");
-        }finally{
-            console.log('Done');
-            mongoose.connection.close();
-        }
-      });
+      await new scheduledSchema({
+        date: targetDate.format(),
+        content: collectedMessage.content,
+        guildId: guild.id,
+        channelId: targetChannel.id,
+      }).save();
       message.reply('Your message has been scheduled.');
     });
   },
