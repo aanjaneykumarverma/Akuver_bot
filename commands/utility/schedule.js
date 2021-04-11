@@ -55,9 +55,11 @@ module.exports = {
             guildId: guild.id,
             channelId: targetChannel.id,
           }).save();
-        } finally{
+        } catch(err){
+          console.log(err,"ERROR");
+        }finally{
             console.log('Done');
-            //mongoose.connection.close();
+            mongoose.connection.close();
         }
       });
       message.reply('Your message has been scheduled.');
