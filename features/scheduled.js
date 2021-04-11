@@ -18,6 +18,7 @@ const checkForPosts = async () => {
     }
     channel.send(content);
   }
+  console.log('hola');
   await scheduledSchema.deleteMany(query);
   setTimeout(checkForPosts, 1000*1);
 };

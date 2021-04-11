@@ -11,7 +11,8 @@ module.exports = {
   guildOnly: true,
   async execute(message, args){
     if(!on){
-      checkForPosts.checkForPosts();
+      await checkForPosts.checkForPosts();
+      console.log('Running checkForPosts');
       on = 1;
     }
     const {mentions, guild, channel } = message;
