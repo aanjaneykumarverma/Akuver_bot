@@ -23,8 +23,8 @@ module.exports = (client) => {
     }
     console.log('hola');
     await scheduledSchema.deleteMany(query);
-    setTimeout(checkForPosts, 1000*1);
     mongoose.connection.close();
+    setTimeout(checkForPosts, 1000*1);
   };
   checkForPosts();
 };
