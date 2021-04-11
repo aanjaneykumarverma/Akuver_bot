@@ -49,7 +49,7 @@ module.exports = {
       await mongo().then(async (mongoose)=>{
         try{
           console.log('Inserting a scheduled msg.');
-          await scheduledSchema.insertOne({
+          await scheduledSchema.create({
             date: targetDate.format(),
             content: collectedMessage.content,
             guildId: guild.id,
