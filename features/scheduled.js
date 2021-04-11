@@ -7,23 +7,27 @@ module.exports = (client) => {
         $lte: Date.now(),
       },
     }
-    const mongoose = await mongo();
-    const results = await scheduledSchema.find(query);
-    for(const post of results){
-      const {guildId, channelId, content} = post;
-      const guild = await client.guilds.fetch(guildId);
-      if(!guild){
-        continue;
+    await mongo().then(async (mongoose)=>{
+      try{
+        const results = await scheduledSchema.find(query);
+        for(const post of results){
+          const {guildId, channelId, content} = post;
+          const guild = await client.guilds.fetch(guildId);
+          if(!guild){
+            continue;
+          }
+          const channel = guild.channels.cache.get(channelId);
+          if(!channel){
+            continue;
+          }
+          channel.send(content);
+        }
+        const result = await scheduledSchema.deleteMany(query);
+        console.log(result);
+      }finally{
+        mongoose.connection.close();
       }
-      const channel = guild.channels.cache.get(channelId);
-      if(!channel){
-        continue;
-      }
-      channel.send(content);
-    }
-    const result = await scheduledSchema.deleteMany(query);
-    console.log(result);
-    mongoose.connection.close();
+    });
     setTimeout(checkForPosts, 1000*10);
   };
   checkForPosts();
