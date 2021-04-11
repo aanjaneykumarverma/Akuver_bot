@@ -12,7 +12,7 @@ module.exports = {
   guildOnly: true,
   async execute(message, args){
     if(!on){
-      await checkForPosts.checkForPosts();
+      await checkForPosts(client);
       console.log('Running checkForPosts');
       on = 1;
     }
