@@ -23,9 +23,14 @@ module.exports = async (client) => {
           channel.send(content);
         }
       }finally{
-        const result = await scheduledSchema.deleteMany(query);
-        console.log(result);
-        console.log('done');
+        mongoose.connection.close();
+      }
+    });
+    await mongo().then(async (mongoose)=>{
+      try{
+        const results = await scheduledSchema.deleteMany(query);
+        console.log(results);
+      }finally{
         mongoose.connection.close();
       }
     });
