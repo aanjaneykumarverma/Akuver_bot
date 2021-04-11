@@ -1,5 +1,6 @@
 const scheduledSchema = require('../schemas/scheduled-schema.js');
 const mongo = require('../util/mongo.js');
+module.exports.async = true;
 module.exports = async (client) => {
   const checkForPosts = async () => {
     const query = {
@@ -29,7 +30,6 @@ module.exports = async (client) => {
     await mongo().then(async (mongoose)=>{
       try{
         const results = await scheduledSchema.deleteMany(query);
-        console.log(results);
       }finally{
         mongoose.connection.close();
       }

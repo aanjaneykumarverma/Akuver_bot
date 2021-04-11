@@ -15,7 +15,7 @@ module.exports={
       });
       for(const file of featuresFiles){
         const feature = require(`../features/${file}`);
-        if(file==='scheduled.js') {
+        if(feature.async) {
           await feature(client);
         } else{
           feature(client);
