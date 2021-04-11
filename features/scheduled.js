@@ -21,9 +21,9 @@ module.exports = (client) => {
       }
       channel.send(content);
     }
-    console.log('hola');
-    await scheduledSchema.deleteMany(query);
-    //mongoose.connection.close();
+    const result = await scheduledSchema.deleteMany(query);
+    console.log(result);
+    mongoose.connection.close();
     setTimeout(checkForPosts, 1000*10);
   };
   checkForPosts();
