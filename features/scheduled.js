@@ -1,30 +1,30 @@
 const scheduledSchema = require('../schemas/scheduled-schema.js');
 const mongo = require('../util/mongo.js');
-const checkForPosts = async () => {
-  const query = {
-    date: {
-      $lte: Date.now(),
-    },
-  }
-  const mongoose = await mongo();
-  const results = await scheduledSchema.find(query);
-  for(const post of results){
-    const {guildId, channelId, content} = post;
-    const guild = await client.guilds.fetch(guildId);
-    if(!guild){
-      continue;
+module.exports = (client) => {
+  const checkForPosts = async () => {
+    const query = {
+      date: {
+        $lte: Date.now(),
+      },
     }
-    const channel = guild.channels.cache.get(channelId);
-    if(!channel){
-      continue;
+    const mongoose = await mongo();
+    const results = await scheduledSchema.find(query);
+    for(const post of results){
+      const {guildId, channelId, content} = post;
+      const guild = await client.guilds.fetch(guildId);
+      if(!guild){
+        continue;
+      }
+      const channel = guild.channels.cache.get(channelId);
+      if(!channel){
+        continue;
+      }
+      channel.send(content);
     }
-    channel.send(content);
-  }
-  console.log('hola');
-  await scheduledSchema.deleteMany(query);
-  setTimeout(checkForPosts, 1000*1);
-  mongoose.connection.close();
+    console.log('hola');
+    await scheduledSchema.deleteMany(query);
+    setTimeout(checkForPosts, 1000*1);
+    mongoose.connection.close();
+  };
+  checkForPosts();
 };
-module.exports = (client) => {};
-
-module.exports.checkForPosts = checkForPosts;
