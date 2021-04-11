@@ -53,7 +53,8 @@ module.exports = {
     timestamps.set(message.author.id,now);
     setTimeout(()=>timestamps.delete(message.author.id), cooldownAmount);
     try{
-      command.execute(message,args);
+      if(command.async) await command.execute(message,args);
+      else command.execute(message,args);
     } catch(error){
       console.error(error);
       message.reply('There was an error while trying to execute that command!');

@@ -8,6 +8,7 @@ module.exports = {
   usage: '<Channel tag> <YYYY/MM/DD> <HH:MM> <"AM" or "PM"> <Timezone>',
   permissions: 'ADMINISTRATOR',
   guildOnly: true,
+  async: true,
   async execute(message, args){
     const {mentions, guild, channel } = message;
     const targetChannel = mentions.channels.first();
@@ -53,9 +54,10 @@ module.exports = {
             content: collectedMessage.content,
             guildId: guild.id,
             channelId: targetChannel.id,
-          }).save().then(()=>mongoose.connection.close())
+          }).save();
         } finally{
             console.log('Done');
+            mongoose.connection.close();
         }
       });
       message.reply('Your message has been scheduled.');
