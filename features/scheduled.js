@@ -1,6 +1,6 @@
 const scheduledSchema = require('../schemas/scheduled-schema.js');
 const mongo = require('../util/mongo.js');
-module.exports = (client) => {
+module.exports = async (client) => {
   const checkForPosts = async () => {
     const query = {
       date: {
