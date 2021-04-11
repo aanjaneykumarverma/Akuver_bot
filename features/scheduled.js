@@ -22,9 +22,10 @@ module.exports = async (client) => {
           }
           channel.send(content);
         }
+      }finally{
         const result = await scheduledSchema.deleteMany(query);
         console.log(result);
-      }finally{
+        console.log('done');
         mongoose.connection.close();
       }
     });
