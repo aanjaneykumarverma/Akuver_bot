@@ -27,6 +27,8 @@ module.exports = async (client) => {
             current: false,
           });
         }
+      }catch(err){
+        console.log(err);
       }finally{
         mongoose.connection.close();
       }
@@ -50,6 +52,8 @@ module.exports = async (client) => {
               member.roles.add(role);
             }
           }
+        }catch(err){
+          console.log(err);
         }finally{
           mongoose.connection.close();
         }
