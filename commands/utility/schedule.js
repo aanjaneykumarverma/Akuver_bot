@@ -45,15 +45,20 @@ module.exports = {
         message.reply('You did not reply in time.');
         return;
       }
+      await mongo().then(async (mongoose)=>{
+        try{
+          console.log('Inserting a scheduled msg.');
+          await new scheduledSchema({
+            date: targetDate.format(),
+            content: collectedMessage.content,
+            guildId: guild.id,
+            channelId: targetChannel.id,
+          }).save();
+        } finally{
+            mongoose.connection.close();
+        }
+      });
       message.reply('Your message has been scheduled.');
-      const mongoose = await mongo();
-        await new scheduledSchema({
-          date: targetDate.format(),
-          content: collectedMessage.content,
-          guildId: guild.id,
-          channelId: targetChannel.id,
-        }).save();
-      mongoose.connection.close();
     });
   },
 };
