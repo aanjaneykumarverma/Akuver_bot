@@ -57,7 +57,7 @@ module.exports = {
           }).save();
         } finally{
             console.log('Done');
-            mongoose.connection.close();
+            //mongoose.connection.close();
         }
       });
       message.reply('Your message has been scheduled.');
