@@ -25,10 +25,10 @@ module.exports = (client) => {
         const result = await scheduledSchema.deleteMany(query);
         console.log(result);
       }finally{
-        console.log('Done');
+        mongoose.connection.close();
       }
     });
     setTimeout(checkForPosts, 1000*10);
   };
-  checkForPosts();
+  await checkForPosts();
 };
