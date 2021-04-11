@@ -15,7 +15,11 @@ module.exports={
       });
       for(const file of featuresFiles){
         const feature = require(`../features/${file}`);
-        feature(client);
+        if(file==='scheduled.js') {
+          await feature(client);
+        } else{
+          feature(client);
+        }
       }
     }
 };

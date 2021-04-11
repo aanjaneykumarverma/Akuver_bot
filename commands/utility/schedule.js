@@ -2,8 +2,6 @@ const momentTimezone = require('moment-timezone');
 const {MessageCollector} = require('discord.js');
 const scheduledSchema = require('../../schemas/scheduled-schema.js');
 const mongo = require('../../util/mongo.js');
-const checkForPosts = require('../../features/scheduled.js');
-let on = 0;
 module.exports = {
   name: 'schedule',
   description: 'Schedules a message.',
@@ -11,11 +9,6 @@ module.exports = {
   permissions: 'ADMINISTRATOR',
   guildOnly: true,
   async execute(message, args){
-    if(!on){
-      await checkForPosts(client);
-      console.log('Running checkForPosts');
-      on = 1;
-    }
     const {mentions, guild, channel } = message;
     const targetChannel = mentions.channels.first();
     if(!targetChannel){
