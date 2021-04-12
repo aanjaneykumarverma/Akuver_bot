@@ -36,7 +36,7 @@ module.exports = {
        Click the ${check} icon when this issue is resolved. `
      ).then((ticketMessage)=>{
        ticketMessage.react(check);
-       userMessage.reply('Your ticket has been sent! Expect a reply within 24 hours.');
+       message.reply('Your ticket has been sent! Expect a reply within 24 hours.');
      });
   },
 };
