@@ -1,5 +1,5 @@
 name: Discord Webhook
-on: [push,pull]
+on: [push]
 jobs:
   report:
     runs-on: ubuntu-latest
