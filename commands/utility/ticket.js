@@ -27,9 +27,10 @@ module.exports = {
   usage: '[MESSAGE]',
   guildOnly: true,
   execute(message,args){
-    const {guild,member} = message;
+    const {guild,member,client} = message;
     registerEvent(client);
     const channel = guild.channels.cache.get(channelID);
+    const text = args.join(' ');
     channel.send(`A new ticket has been created by <@${member.id}>\n
        "${text}"\n
        Click the ${check} icon when this issue is resolved. `
