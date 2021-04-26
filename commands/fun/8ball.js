@@ -19,14 +19,14 @@ module.exports = {
   name: '8ball',
   description: 'Lets see what the magic ball has to say!',
   usage: ' QUESTION ',
-  async execute(message, args) {
+  execute(message, args) {
     const question = args.join(' ');
     if (!question) {
       return message.reply(
         "Please provide a question to ask, or are you dumb & can't even do that!!"
       );
     }
-    const answer = answers[Math.floor(Math.random() * answers.length())];
+    const answer = answers[Math.floor(Math.random() * answers.length)];
     const embed = new MessageEmbed()
       .setColor('#0099ff')
       .setTitle('8-Ball')
