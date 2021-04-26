@@ -1,5 +1,5 @@
 const momentTimezone = require('moment-timezone');
-const {MessageCollector} = require('discord.js');
+const { MessageCollector } = require('discord.js');
 const scheduledSchema = require('../../schemas/scheduled-schema.js');
 const mongo = require('../../util/mongo.js');
 module.exports = {
@@ -9,22 +9,26 @@ module.exports = {
   permissions: 'ADMINISTRATOR',
   guildOnly: true,
   async: true,
-  async execute(message, args){
-    const {mentions, guild, channel } = message;
+  async execute(message, args) {
+    const { mentions, guild, channel } = message;
     const targetChannel = mentions.channels.first();
-    if(!targetChannel){
+    if (!targetChannel) {
       message.reply('Please tag a channel to send your message in.');
       return;
     }
     args.shift();
     const [date, time, clockType, timeZone] = args;
-    if(clockType !== 'AM' && clockType !== 'PM'){
-      message.reply(`You must provide either "AM" or "PM", you provided "${clockType}"`);
+    if (clockType !== 'AM' && clockType !== 'PM') {
+      message.reply(
+        `You must provide either "AM" or "PM", you provided "${clockType}"`
+      );
       return;
     }
     const validTimeZones = momentTimezone.tz.names();
-    if(!validTimeZones.includes(timeZone)){
-      message.reply('Unknown timezone! Please choose a valid one from <https://github.com/Akuver/Akuver_bot/blob/main/util/timezones.txt>');
+    if (!validTimeZones.includes(timeZone)) {
+      message.reply(
+        'Unknown timezone! Please choose a valid one from <https://github.com/Akuver/Akuver_bot/blob/main/util/timezones.txt>'
+      );
       return;
     }
     const targetDate = momentTimezone.tz(
@@ -35,14 +39,14 @@ module.exports = {
     message.reply('Please send the message you would like to schedule.');
     const filter = (newMessage) => {
       return newMessage.author.id === message.author.id;
-    }
+    };
     const collector = new MessageCollector(channel, filter, {
       max: 1,
-      time: 1000*60,
-    })
-    collector.on('end', async(collected)=>{
+      time: 1000 * 60,
+    });
+    collector.on('end', async (collected) => {
       const collectedMessage = collected.first();
-      if(!collectedMessage){
+      if (!collectedMessage) {
         message.reply('You did not reply in time.');
         return;
       }

@@ -1,4 +1,4 @@
-const channels = ['826698915763060807','825706248783003648'];  //polls, testing
+const channels = ['826698915763060807', '825706248783003648']; //polls, testing
 
 module.exports = (client) => {
   client.on('message', (message) => {
@@ -15,5 +15,5 @@ module.exports = (client) => {
         message.react(emoji);
       }
     }
-  })
-}
+  });
+};

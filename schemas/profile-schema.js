@@ -17,7 +17,7 @@ const profileSchema = mongoose.Schema({
   coins: {
     type: Number,
     required: true,
-  }
+  },
 });
 
-module.exports = mongoose.model('profiles', profileSchema)    // profiles is the table name
+module.exports = mongoose.model('profiles', profileSchema); // profiles is the table name

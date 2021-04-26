@@ -7,36 +7,36 @@ module.exports = async (client) => {
       date: {
         $lte: Date.now(),
       },
-    }
-    await mongo().then(async (mongoose)=>{
-      try{
+    };
+    await mongo().then(async (mongoose) => {
+      try {
         const results = await scheduledSchema.find(query);
-        for(const post of results){
-          const {guildId, channelId, content} = post;
+        for (const post of results) {
+          const { guildId, channelId, content } = post;
           const guild = await client.guilds.fetch(guildId);
-          if(!guild){
+          if (!guild) {
             continue;
           }
           const channel = guild.channels.cache.get(channelId);
-          if(!channel){
+          if (!channel) {
             continue;
           }
           channel.send(content);
         }
-      }catch(err){
+      } catch (err) {
         console.log(err);
-      }finally{
+      } finally {
         mongoose.connection.close();
       }
     });
-    await mongo().then(async (mongoose)=>{
-      try{
+    await mongo().then(async (mongoose) => {
+      try {
         const results = await scheduledSchema.deleteMany(query);
-      }finally{
+      } finally {
         mongoose.connection.close();
       }
     });
-    setTimeout(checkForPosts, 1000*10);
+    setTimeout(checkForPosts, 1000 * 10);
   };
   await checkForPosts();
 };

@@ -1,10 +1,10 @@
 const Canvas = require('canvas');
-const {MessageAttachment} = require('discord.js');
-const path =  require('path');
+const { MessageAttachment } = require('discord.js');
+const path = require('path');
 
 module.exports = {
   name: 'guildMemberAdd',
-  async execute(member,client){
+  async execute(member, client) {
     const channelId = '820653558209708112'; //welcome
     const targetChannelId = '815477746310184962'; // rules-and-info
     const msg = `Welcome aboard <@${member.user.id}>! Please check out <#${targetChannelId}>`;
@@ -24,17 +24,17 @@ module.exports = {
         format: 'png',
       })
     );
-    x = canvas.width/2 - pfp.width/2;
+    x = canvas.width / 2 - pfp.width / 2;
     y = 25;
     ctx.drawImage(pfp, x, y);
     ctx.fillStyle = '#ffffff';
     ctx.font = '35px sans-serif';
     let text = `Welcome ${member.user.tag}`;
-    x = canvas.width/2 - ctx.measureText(text).width/2;
+    x = canvas.width / 2 - ctx.measureText(text).width / 2;
     ctx.fillText(text, x, 60 + pfp.height);
     ctx.font = '30px sans-serif';
     text = `Member #${member.guild.memberCount}`;
-    x = canvas.width/2 - ctx.measureText(text).width/2;
+    x = canvas.width / 2 - ctx.measureText(text).width / 2;
     ctx.fillText(text, x, 100 + pfp.height);
     const attachment = new MessageAttachment(canvas.toBuffer());
     channel.send(msg, attachment);

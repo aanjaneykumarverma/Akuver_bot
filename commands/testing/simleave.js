@@ -3,7 +3,7 @@ module.exports = {
   description: 'Simulates a leave.',
   usage: ' ',
   permissions: 'ADMINISTRATOR',
-  execute(message,args){
+  execute(message, args) {
     const client = message.client;
     client.emit('guildMemberLeave', message.member);
   },

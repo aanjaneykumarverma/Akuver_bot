@@ -5,26 +5,29 @@ const reqString = {
   required: true,
 };
 
-const muteSchema = mongoose.Schema({
-  userId: reqString,
-  guildId: reqString,
-  reason: reqString,
-  staffId: reqString,
-  staffTag: reqString,
-  curRoles: {
-    type: String,
-    default: '',
+const muteSchema = mongoose.Schema(
+  {
+    userId: reqString,
+    guildId: reqString,
+    reason: reqString,
+    staffId: reqString,
+    staffTag: reqString,
+    curRoles: {
+      type: String,
+      default: '',
+    },
+    expires: {
+      type: Date,
+      required: true,
+    },
+    current: {
+      type: Boolean,
+      required: true,
+    },
   },
-  expires: {
-    type: Date,
-    required: true,
-  },
-  current: {
-    type: Boolean,
-    required: true,
+  {
+    timestamps: true,
   }
-}, {
-  timestamps: true,
-});
+);
 
-module.exports = mongoose.model('mutes',muteSchema);
+module.exports = mongoose.model('mutes', muteSchema);
