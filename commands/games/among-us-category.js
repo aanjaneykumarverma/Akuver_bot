@@ -3,7 +3,7 @@ const amongUsCategorySchema = require('../../schemas/among-us-category-schema.js
 module.exports = {
   name: 'aucatset',
   description: 'Sets a category for Among Us voice channel.',
-  usage: '[categoryName]',
+  usage: ' categoryName',
   guildOnly: true,
   async execute(message, args) {
     let categoryName = args;

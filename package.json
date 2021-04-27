@@ -1,6 +1,6 @@
 {
   "name": "akuverbot",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "A Discord Bot For Learning Purposes",
   "main": "bot.js",
   "scripts": {
@@ -10,11 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "canvas": "^2.7.0",
+    "discord-image-generation": "^1.4.9",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "is-url": "^1.2.4",
     "moment-timezone": "^0.5.33",
     "mongoose": "^5.12.2",
+    "node-fetch": "^2.6.1",
     "node-sass": "^5.0.0",
     "reconlx": "^1.2.41",
     "request": "^2.88.2"

@@ -3,7 +3,7 @@ const currency = require('../../features/currency.js');
 module.exports = {
   name: 'leaderboard',
   description: 'Displays the leaderboard (Top x)',
-  usage: '[x(max 10) optional]',
+  usage: ' x(maximum 10)(optional)',
   cooldown: 10,
   guildOnly: true,
   async execute(message, args) {

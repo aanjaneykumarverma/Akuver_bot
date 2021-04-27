@@ -3,7 +3,7 @@ const currency = require('../../features/currency.js');
 module.exports = {
   name: 'transfer',
   description: 'Transfers currency to mentioned user',
-  usage: '[currency MEMBER]',
+  usage: ' currency @member',
   cooldown: 10,
   guildOnly: true,
   async execute(message, args) {

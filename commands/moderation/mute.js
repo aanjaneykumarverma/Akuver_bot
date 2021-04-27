@@ -9,7 +9,7 @@ const reasons = {
 module.exports = {
   name: 'mute',
   description: 'Mutes a user',
-  usage: '[@USER REASON]',
+  usage: ' @user reason',
   permissions: 'ADMINISTRATOR',
   async execute(message, args) {
     const { guild, author: staff } = message;

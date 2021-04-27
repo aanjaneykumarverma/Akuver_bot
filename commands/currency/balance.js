@@ -3,7 +3,7 @@ const currency = require('../../features/currency.js');
 module.exports = {
   name: 'bal',
   description: 'Returns the balance of the user.',
-  usage: '[MEMBER_MENTION_OPTIONAL]',
+  usage: ' @member(optional)',
   cooldown: 5,
   async execute(message, args) {
     const target = message.mentions.users.first() || message.author;

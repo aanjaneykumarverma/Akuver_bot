@@ -4,7 +4,7 @@ const muteSchema = require('../../schemas/mute-schema.js');
 module.exports = {
   name: 'unmute',
   description: 'Unmutes a user.',
-  usage: '[@USER]',
+  usage: ' @user',
   permissions: 'ADMINISTRATOR',
   async execute(message, args) {
     const { guild } = message;

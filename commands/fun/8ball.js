@@ -18,7 +18,7 @@ const answers = [
 module.exports = {
   name: '8ball',
   description: 'Lets see what the magic ball has to say!',
-  usage: ' QUESTION ',
+  usage: ' question',
   execute(message, args) {
     const question = args.join(' ');
     if (!question) {

@@ -1,7 +1,7 @@
 module.exports = {
   name: 'kick',
   description: 'Kicks the specified user from the server.',
-  usage: '[@user_id]',
+  usage: ' @user',
   permissions: 'ADMINISTRATOR,KICK_MEMBERS',
   guildOnly: true,
   execute(message, args) {

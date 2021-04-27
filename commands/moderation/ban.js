@@ -1,7 +1,7 @@
 module.exports = {
   name: 'ban',
   description: 'Bans the specified user from the server.',
-  usage: '[@user_id]',
+  usage: ' @user',
   permissions: 'ADMINISTRATOR,BAN_MEMBERS',
   guildOnly: true,
   execute(message, args) {

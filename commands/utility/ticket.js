@@ -24,7 +24,7 @@ const registerEvent = (client) => {
 module.exports = {
   name: 'ticket',
   description: 'Issue a ticket for some problem.',
-  usage: '[MESSAGE]',
+  usage: ' message ',
   guildOnly: true,
   execute(message, args) {
     const { guild, member, client } = message;

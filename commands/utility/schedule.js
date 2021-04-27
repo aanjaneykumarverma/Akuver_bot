@@ -5,7 +5,7 @@ const mongo = require('../../util/mongo.js');
 module.exports = {
   name: 'schedule',
   description: 'Schedules a message.',
-  usage: '<Channel tag> <YYYY/MM/DD> <HH:MM> <"AM" or "PM"> <Timezone>',
+  usage: ' <Channel tag> <YYYY/MM/DD> <HH:MM> <"AM" or "PM"> <Timezone>',
   permissions: 'ADMINISTRATOR',
   guildOnly: true,
   async: true,

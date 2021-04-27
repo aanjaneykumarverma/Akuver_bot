@@ -3,7 +3,7 @@ const { tictactoe } = require('reconlx');
 module.exports = {
   name: 'ttt',
   description: 'Play tic tac toe with the mentioned user!',
-  usage: '@user',
+  usage: ' @user',
   guildOnly: true,
   async execute(message, args) {
     const user = message.mentions.members.first();

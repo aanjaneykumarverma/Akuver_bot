@@ -1,7 +1,7 @@
 module.exports = {
   name: 'slow',
   description: 'Changes the slowmode duration for this channel.',
-  usage: '[duration reason]',
+  usage: ' duration reason ',
   permissions: 'ADMINISTRATOR',
   guildOnly: true,
   execute(message, args) {

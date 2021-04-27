@@ -5,7 +5,7 @@ const baseURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
 module.exports = {
   name: 'weather',
   description: 'Provides the weather of the city.',
-  usage: '[city_name]',
+  usage: ' city_name',
   cooldown: 5,
   async execute(message, args) {
     const city = args[0];
