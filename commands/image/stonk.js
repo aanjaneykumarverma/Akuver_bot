@@ -5,7 +5,7 @@ module.exports = {
   name: 'stonk',
   description: "Converts a user's avatar in stonk meme !!",
   usage: ' @user',
-  cooldown: 15,
+  cooldown: 8,
   async execute(message, args) {
     const user = message.mentions.members.first();
 

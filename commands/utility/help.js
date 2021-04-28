@@ -3,7 +3,7 @@ const { prefix } = require('../../config.json');
 module.exports = {
   name: 'help',
   description: 'lists all valid commands with their usage.',
-  usage: ' command_name',
+  usage: ' ',
   cooldown: 5,
   execute(message, args) {
     const data = [];
@@ -35,7 +35,7 @@ module.exports = {
         data.push(`${prefix}${mainCommand}${usage} = ${description}\n`);
       }
       data.push(
-        `\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`
+        `\nYou can send \`${prefix}help command_name\` to get info on a specific command!`
       );
       return message.author
         .send(data, { split: true, code: true })

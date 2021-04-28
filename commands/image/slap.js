@@ -5,7 +5,7 @@ module.exports = {
   name: 'slap',
   description: 'Posts you slapping the mentioned user',
   usage: ' @user',
-  cooldown: 15,
+  cooldown: 8,
   async execute(message, args) {
     const user = message.mentions.members.first();
 

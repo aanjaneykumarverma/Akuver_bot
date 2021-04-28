@@ -5,7 +5,7 @@ module.exports = {
   name: 'affect',
   description: "Converts a user's avatar in affect my baby meme !!",
   usage: ' @user',
-  cooldown: 15,
+  cooldown: 8,
   async execute(message, args) {
     const user = message.mentions.members.first();
 

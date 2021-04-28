@@ -1,5 +1,5 @@
 const firstMsg = require('../util/first_msg.js');
-
+const { prefix } = require('../config.json');
 module.exports = (client) => {
   const channelId = '815477746310184962';
   const botId = '815474132182368256';
@@ -17,6 +17,7 @@ module.exports = (client) => {
     '5. Do not ping people out of nowhere unless you have a good reason.'
   );
   text.push(`**Verify yourself and claim roles in <#${roleChannelId}>**`);
+  text.push(`**Send ${prefix}help to get the list of commands. **`);
   text.join('\n');
   firstMsg(client, channelId, text);
 };

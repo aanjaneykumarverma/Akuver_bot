@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const answers = [
   'Oh hell yeah',
-  'Hello no',
+  'Hell no',
   'Yes I guess ?',
   'Probably wrong',
   'You never know',
