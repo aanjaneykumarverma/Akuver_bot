@@ -1,4 +1,5 @@
-const { prefix } = require('../config.json');
+const { prefix: globalPrefix } = require('../config.json');
+const { prefix } = require('../util/update.js');
 const Discord = require('discord.js');
 const cooldowns = new Discord.Collection();
 const mongo = require('../util/mongo.js');
@@ -17,8 +18,15 @@ module.exports = {
         await currency.addCoins(guild.id, member.id, coinsToAdd);
       }
     }
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
-    const args = message.content.slice(prefix.length).trim().split(/ +/); // trim removes whitespaces from both sides of string
+    if (
+      !message.content.startsWith(prefix[guild.id] || globalPrefix) ||
+      message.author.bot
+    )
+      return;
+    const args = message.content
+      .slice(prefix[guild.id].length || globalPrefix.length)
+      .trim()
+      .split(/ +/); // trim removes whitespaces from both sides of string
     const commandName = args.shift().toLowerCase();
     const client = message.client;
     if (!client.commands.has(commandName) && channel.name !== 'testing') {
