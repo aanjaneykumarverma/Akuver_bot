@@ -1,5 +1,5 @@
-const { prefix } = require('../../config.json');
-
+const { prefix: globalPrefix } = require('../../config.json');
+const { prefix } = require('../../util/update.js');
 module.exports = {
   name: 'help',
   description: 'lists all valid commands with their usage.',
@@ -32,7 +32,11 @@ module.exports = {
         const mainCommand = command.name;
         const usage = command.usage ? `${command.usage}` : '';
         const { description } = command;
-        data.push(`${prefix}${mainCommand}${usage} = ${description}\n`);
+        data.push(
+          `${
+            prefix[message.guild.id] || globalPrefix
+          }${mainCommand}${usage} = ${description}\n`
+        );
       }
       data.push(
         `\nYou can send \`${prefix}help command_name\` to get info on a specific command!`
