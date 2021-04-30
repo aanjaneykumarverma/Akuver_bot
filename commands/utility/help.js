@@ -39,7 +39,9 @@ module.exports = {
         );
       }
       data.push(
-        `\nYou can send \`${prefix}help command_name\` to get info on a specific command!`
+        `\nYou can send \`${
+          prefix[message.guild.id] || globalPrefix
+        }help command_name\` to get info on a specific command!`
       );
       return message.author
         .send(data, { split: true, code: true })
