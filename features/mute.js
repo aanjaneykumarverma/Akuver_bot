@@ -40,7 +40,7 @@ module.exports = async (client) => {
     const { guild, id } = member;
     await mongo().then(async (mongoose) => {
       try {
-        const currentMute = await muteSchemafindOne({
+        const currentMute = await muteSchema.findOne({
           userId: id,
           current: true,
         });
