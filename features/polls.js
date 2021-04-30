@@ -3,6 +3,7 @@ const channels = ['826698915763060807', '825706248783003648']; //polls, testing
 module.exports = (client) => {
   client.on('message', (message) => {
     const { channel, content } = message;
+    if (message.guild.available === false) return;
     const guildId = message.guild.id;
     if (typeof poll[guildId] === 'undefined') return;
     if (channel.id !== poll[guildId].substring(2, poll[guildId].length - 1)) {
