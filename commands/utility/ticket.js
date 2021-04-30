@@ -1,4 +1,4 @@
-const channelID = '815477746310184966';
+const { ticket } = require('../../util/update.js');
 const check = '✅';
 let registered = false;
 
@@ -28,8 +28,11 @@ module.exports = {
   guildOnly: true,
   execute(message, args) {
     const { guild, member, client } = message;
+    if (typeof ticket[guild.id] === 'undefined') return;
     registerEvent(client);
-    const channel = guild.channels.cache.get(channelID);
+    const channel = guild.channels.cache.get(
+      ticket[guild.id].substring(2, ticket[guild.id].length - 1)
+    );
     const text = args.join(' ');
     channel
       .send(

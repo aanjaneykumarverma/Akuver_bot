@@ -1,7 +1,11 @@
+const { leave } = require('../util/update.js');
+
 module.exports = {
   name: 'guildMemberLeave',
   execute(member, client) {
-    const channelId = '826455840705609738'; //leave-logs
+    const guildId = member.guild.id;
+    if (typeof leave[guildId] === 'undefined') return;
+    const channelId = leave[guildId].substring(2, leave[guildId].length - 1);
     const msg = `<@${member.user.id}> has left the server.`;
     const channel = member.guild.channels.cache.get(channelId);
     channel.send(msg);

@@ -1,9 +1,8 @@
 const firstMsg = require('../util/first_msg.js');
-
+const { role } = require('../util/update.js');
 module.exports = (client) => {
-  const channelId = '826000469800517713';
   const botId = '815474132182368256';
-
+  const channels = client.guilds.cache.map((guild) => role[guild.id]);
   const emojis = {
     '🔒': 'Verified',
   };
@@ -15,36 +14,43 @@ module.exports = (client) => {
     const role = emojis[emoji];
     emojiText += `${emoji} = ${role}\n`;
   }
-
-  firstMsg(client, channelId, emojiText, reactions);
-
-  const handleReaction = (reaction, user, select) => {
-    if (user.id === botId) return;
-
-    const emoji = reaction._emoji.name;
-    const { guild } = reaction.message;
-    const roleName = emojis[emoji];
-
-    if (!roleName) return;
-
-    const role = guild.roles.cache.find((role) => role.name === roleName);
-    const member = guild.members.cache.find((member) => member.id === user.id);
-
-    if (select) {
-      member.roles.add(role);
-    } else {
-      member.roles.remove(role);
+  for (const channel of channels) {
+    if (typeof channel === 'undefined') {
+      continue;
     }
-  };
-  client.on('messageReactionAdd', (reaction, user) => {
-    if (reaction.message.channel.id === channelId) {
-      handleReaction(reaction, user, true);
-    }
-  });
+    const channelId = channel.substring(2, channel.length - 1);
+    firstMsg(client, channelId, emojiText, reactions);
 
-  client.on('messageReactionRemove', (reaction, user) => {
-    if (reaction.message.channel.id === channelId) {
-      handleReaction(reaction, user, false);
-    }
-  });
+    const handleReaction = (reaction, user, select) => {
+      if (user.id === botId) return;
+
+      const emoji = reaction._emoji.name;
+      const { guild } = reaction.message;
+      const roleName = emojis[emoji];
+
+      if (!roleName) return;
+
+      const role = guild.roles.cache.find((role) => role.name === roleName);
+      const member = guild.members.cache.find(
+        (member) => member.id === user.id
+      );
+
+      if (select) {
+        member.roles.add(role);
+      } else {
+        member.roles.remove(role);
+      }
+    };
+    client.on('messageReactionAdd', (reaction, user) => {
+      if (reaction.message.channel.id === channelId) {
+        handleReaction(reaction, user, true);
+      }
+    });
+
+    client.on('messageReactionRemove', (reaction, user) => {
+      if (reaction.message.channel.id === channelId) {
+        handleReaction(reaction, user, false);
+      }
+    });
+  }
 };

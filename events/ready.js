@@ -1,4 +1,5 @@
 const mongo = require('../util/mongo.js');
+const { loadData } = require('../util/update.js');
 const fs = require('fs');
 const featuresFiles = fs
   .readdirSync('./features')
@@ -15,6 +16,7 @@ module.exports = {
         mongoose.connection.close();
       }
     });
+    await loadData(client);
     for (const file of featuresFiles) {
       const feature = require(`../features/${file}`);
       if (feature.async) {

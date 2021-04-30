@@ -1,12 +1,20 @@
 const Canvas = require('canvas');
 const { MessageAttachment } = require('discord.js');
 const path = require('path');
-
+const { welcome, rules } = require('../util/update.js');
 module.exports = {
   name: 'guildMemberAdd',
   async execute(member, client) {
-    const channelId = '820653558209708112'; //welcome
-    const targetChannelId = '815477746310184962'; // rules-and-info
+    const guildId = member.guild.id;
+    if (typeof welcome[guildId] === 'undefined') return;
+    const channelId = welcome[guildId].substring(
+      2,
+      welcome[guildId].length - 1
+    );
+    const targetChannelId = rules[guildId].substring(
+      2,
+      rules[guildId].length - 1
+    );
     const msg = `Welcome aboard <@${member.user.id}>! Please check out <#${targetChannelId}>`;
 
     const channel = member.guild.channels.cache.get(channelId);
