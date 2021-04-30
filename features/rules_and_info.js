@@ -1,4 +1,5 @@
 const firstMsg = require('../util/first_msg.js');
+const { prefix: globalPrefix } = require('../config.json');
 const { rules, role, prefix } = require('../util/update.js');
 module.exports = (client) => {
   const botId = '815474132182368256';
@@ -22,7 +23,11 @@ module.exports = (client) => {
       '5. Do not ping people out of nowhere unless you have a good reason.'
     );
     text.push(`**Verify yourself and claim roles in ${role[guild]}**`);
-    text.push(`**Send ${prefix[guild]}help to get the list of commands. **`);
+    text.push(
+      `**Send ${
+        prefix[guild] || globalPrefix
+      }help to get the list of commands. **`
+    );
     text.join('\n');
     firstMsg(client, rules[guild].substring(2, rules[guild].length - 1), text);
   }
