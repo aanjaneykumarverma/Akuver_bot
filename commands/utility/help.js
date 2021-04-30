@@ -34,13 +34,13 @@ module.exports = {
         const { description } = command;
         data.push(
           `${
-            prefix[message.guild.id] || globalPrefix
+            prefix[message.guild.id.toString()] || globalPrefix
           }${mainCommand}${usage} = ${description}\n`
         );
       }
       data.push(
         `\nYou can send \`${
-          prefix[message.guild.id] || globalPrefix
+          prefix[message.guild.id.toString()] || globalPrefix
         }help command_name\` to get info on a specific command!`
       );
       return message.author

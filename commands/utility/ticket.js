@@ -28,10 +28,13 @@ module.exports = {
   guildOnly: true,
   execute(message, args) {
     const { guild, member, client } = message;
-    if (typeof ticket[guild.id] === 'undefined') return;
+    if (typeof ticket[guild.id.toString()] === 'undefined') return;
     registerEvent(client);
     const channel = guild.channels.cache.get(
-      ticket[guild.id].substring(2, ticket[guild.id].length - 1)
+      ticket[guild.id.toString()].substring(
+        2,
+        ticket[guild.id.toString()].length - 1
+      )
     );
     const text = args.join(' ');
     channel

@@ -18,13 +18,16 @@ module.exports = {
         await currency.addCoins(guild.id, member.id, coinsToAdd);
       }
     }
+    console.log(guild.id);
     if (
-      !message.content.startsWith(prefix[guild.id] || globalPrefix) ||
+      !message.content.startsWith(
+        prefix[guild.id.toString()] || globalPrefix
+      ) ||
       message.author.bot
     )
       return;
     const args = message.content
-      .slice(prefix[guild.id].length || globalPrefix.length)
+      .slice(prefix[guild.id.toString()].length || globalPrefix.length)
       .trim()
       .split(/ +/); // trim removes whitespaces from both sides of string
     const commandName = args.shift().toLowerCase();

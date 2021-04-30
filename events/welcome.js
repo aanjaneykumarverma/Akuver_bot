@@ -6,14 +6,14 @@ module.exports = {
   name: 'guildMemberAdd',
   async execute(member, client) {
     const guildId = member.guild.id;
-    if (typeof welcome[guildId] === 'undefined') return;
-    const channelId = welcome[guildId].substring(
+    if (typeof welcome[guildId.toString()] === 'undefined') return;
+    const channelId = welcome[guildId.toString()].substring(
       2,
-      welcome[guildId].length - 1
+      welcome[guildId.toString()].length - 1
     );
-    const targetChannelId = rules[guildId].substring(
+    const targetChannelId = rules[guildId.toString()].substring(
       2,
-      rules[guildId].length - 1
+      rules[guildId.toString()].length - 1
     );
     const msg = `Welcome aboard <@${member.user.id}>! Please check out <#${targetChannelId}>`;
 

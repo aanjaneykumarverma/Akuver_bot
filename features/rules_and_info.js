@@ -6,8 +6,8 @@ module.exports = (client) => {
   const guilds = client.guilds.cache.map((guild) => guild.id);
   for (const guild of guilds) {
     if (
-      typeof role[guild] === 'undefined' ||
-      typeof rules[guild] === 'undefined'
+      typeof role[guild.toString()] === 'undefined' ||
+      typeof rules[guild.toString()] === 'undefined'
     )
       continue;
     let text = [];
@@ -22,13 +22,19 @@ module.exports = (client) => {
     text.push(
       '5. Do not ping people out of nowhere unless you have a good reason.'
     );
-    text.push(`**Verify yourself and claim roles in ${role[guild]}**`);
+    text.push(
+      `**Verify yourself and claim roles in ${role[guild.toString()]}**`
+    );
     text.push(
       `**Send ${
-        prefix[guild] || globalPrefix
+        prefix[guild.toString()] || globalPrefix
       }help to get the list of commands. **`
     );
     text.join('\n');
-    firstMsg(client, rules[guild].substring(2, rules[guild].length - 1), text);
+    firstMsg(
+      client,
+      rules[guild.toString()].substring(2, rules[guild.toString()].length - 1),
+      text
+    );
   }
 };

@@ -5,8 +5,11 @@ module.exports = (client) => {
     const { channel, content } = message;
     if (!message || !message.guild) return;
     const guildId = message.guild.id;
-    if (typeof poll[guildId] === 'undefined') return;
-    if (channel.id !== poll[guildId].substring(2, poll[guildId].length - 1)) {
+    if (typeof poll[guildId.toString()] === 'undefined') return;
+    if (
+      channel.id !==
+      poll[guildId.toString()].substring(2, poll[guildId.toString()].length - 1)
+    ) {
       return;
     }
     const eachLine = content.split('\n');
