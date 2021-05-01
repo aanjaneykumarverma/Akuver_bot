@@ -7,6 +7,7 @@ const addReactions = (message, reactions) => {
 };
 
 module.exports = async (client, id, text, reactions = []) => {
+  if (!id) return;
   const channel = await client.channels.fetch(id);
   channel.messages.fetch().then((messages) => {
     if (messages.size === 0) {

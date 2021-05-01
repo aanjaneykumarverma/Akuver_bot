@@ -13,7 +13,21 @@ module.exports.loadData = async (client) => {
     try {
       for (const guild of client.guilds.cache) {
         const guildId = guild[1].id;
-        const result = await guildSchema.findOne({ _id: guildId });
+        let result = await guildSchema.findOne({ _id: guildId });
+        if (!result) {
+          result = await guildSchema.findOneAndUpdate(
+            {
+              _id: guildId,
+            },
+            {
+              _id: guildId,
+            },
+            {
+              upsert: true, //update+insert
+              new: true, // return the updated value; not the old one.
+            }
+          );
+        }
         guildPrefixes[guildId] = result.prefix;
         guildWelcomes[guildId] = result.welcome;
         guildRules[guildId] = result.rules;
