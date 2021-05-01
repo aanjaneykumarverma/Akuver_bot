@@ -2,7 +2,7 @@ const { ticket } = require('../../util/update.js');
 const check = '✅';
 let registered = false;
 
-const registerEvent = (client) => {
+const registerEvent = (client, channelID) => {
   if (registered) {
     return;
   }
@@ -29,13 +29,12 @@ module.exports = {
   execute(message, args) {
     const { guild, member, client } = message;
     if (typeof ticket[guild.id.toString()] === 'undefined') return;
-    registerEvent(client);
-    const channel = guild.channels.cache.get(
-      ticket[guild.id.toString()].substring(
-        2,
-        ticket[guild.id.toString()].length - 1
-      )
+    const channelId = ticket[guild.id.toString()].substring(
+      2,
+      ticket[guild.id.toString()].length - 1
     );
+    registerEvent(client, channelId);
+    const channel = guild.channels.cache.get(channelId);
     const text = args.join(' ');
     channel
       .send(
