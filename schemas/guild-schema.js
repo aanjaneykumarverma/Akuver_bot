@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const prefix = require('../config.json');
 const reqString = {
   type: String,
   required: true,
@@ -10,10 +9,7 @@ const defString = {
 };
 const guildSchema = mongoose.Schema({
   _id: reqString, // guildId
-  prefix: {
-    type: String,
-    default: prefix,
-  },
+  prefix: reqString,
   welcome: defString,
   rules: defString,
   role: defString,

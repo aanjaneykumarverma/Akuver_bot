@@ -1,5 +1,6 @@
 const mongo = require('./mongo.js');
 const guildSchema = require('../schemas/guild-schema.js');
+const { prefix } = require('../config.json');
 const guildPrefixes = {};
 const guildWelcomes = {};
 const guildRules = {};
@@ -21,6 +22,7 @@ module.exports.loadData = async (client) => {
             },
             {
               _id: guildId,
+              prefix: prefix,
             },
             {
               upsert: true, //update+insert
