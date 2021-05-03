@@ -15,7 +15,7 @@ module.exports = {
     let id = '';
     const target = message.mentions.users.first();
     if (!target) {
-      message.reply('Please specify someone to mute.');
+      message.reply('Please specify someone to unmute.');
       return;
     }
     id = target.id;
