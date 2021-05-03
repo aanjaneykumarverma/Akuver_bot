@@ -29,10 +29,7 @@ module.exports = {
   execute(message, args) {
     const { guild, member, client } = message;
     if (typeof ticket[guild.id.toString()] === 'undefined') return;
-    const channelId = ticket[guild.id.toString()].substring(
-      2,
-      ticket[guild.id.toString()].length - 1
-    );
+    const channelId = ticket[guild.id.toString()];
     registerEvent(client, channelId);
     const channel = guild.channels.cache.get(channelId);
     const text = args.join(' ');

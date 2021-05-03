@@ -23,7 +23,7 @@ module.exports = (client) => {
       '5. Do not ping people out of nowhere unless you have a good reason.'
     );
     text.push(
-      `**Verify yourself and claim roles in ${role[guild.toString()]}**`
+      `**Verify yourself and claim roles in <#${role[guild.toString()]}>**`
     );
     text.push(
       `**Send ${
@@ -31,10 +31,6 @@ module.exports = (client) => {
       }help to get the list of commands. **`
     );
     text.join('\n');
-    firstMsg(
-      client,
-      rules[guild.toString()].substring(2, rules[guild.toString()].length - 1),
-      text
-    );
+    firstMsg(client, rules[guild.toString()], text);
   }
 };

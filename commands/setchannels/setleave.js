@@ -6,12 +6,17 @@ module.exports = {
   description: 'Sets(changes) the leave channel for this server',
   permissions: 'ADMINISTRATOR',
   cooldown: 20,
+  usage: ' Channel tag',
   guildOnly: true,
   async execute(message, args) {
+    const channel = message.mentions.channels.first();
+    if (!channel) {
+      return message.reply('Please mention a valid channel.');
+    }
     await mongo().then(async (mongoose) => {
       try {
         const guildId = message.guild.id;
-        const leave = args[0];
+        const leave = channel.id.toString();
         await guildSchema.findOneAndUpdate(
           {
             _id: guildId,
@@ -24,7 +29,7 @@ module.exports = {
             upsert: true,
           }
         );
-        message.reply(`The leave channel for this server is ${leave} now.`);
+        message.reply(`The leave channel for this server is ${channel} now.`);
         updateCache(guildId, 'setleave', leave);
       } finally {
         mongoose.connection.close();

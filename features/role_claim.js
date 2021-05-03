@@ -14,11 +14,10 @@ module.exports = (client) => {
     const role = emojis[emoji];
     emojiText += `${emoji} = ${role}\n`;
   }
-  for (const channel of channels) {
-    if (typeof channel === 'undefined') {
+  for (const channelId of channels) {
+    if (typeof channelId === 'undefined') {
       continue;
     }
-    const channelId = channel.substring(2, channel.length - 1);
     firstMsg(client, channelId, emojiText, reactions);
 
     const handleReaction = (reaction, user, select) => {

@@ -7,14 +7,8 @@ module.exports = {
   async execute(member, client) {
     const guildId = member.guild.id;
     if (typeof welcome[guildId.toString()] === 'undefined') return;
-    const channelId = welcome[guildId.toString()].substring(
-      2,
-      welcome[guildId.toString()].length - 1
-    );
-    const targetChannelId = rules[guildId.toString()].substring(
-      2,
-      rules[guildId.toString()].length - 1
-    );
+    const channelId = welcome[guildId.toString()];
+    const targetChannelId = rules[guildId.toString()];
     const msg = `Welcome aboard <@${member.user.id}>! Please check out <#${targetChannelId}>`;
 
     const channel = member.guild.channels.cache.get(channelId);

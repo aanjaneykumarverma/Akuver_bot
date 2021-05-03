@@ -6,8 +6,12 @@ module.exports = {
   description: 'Changes the prefix for commands for this server.',
   permissions: 'ADMINISTRATOR',
   cooldown: 20,
+  usage: ' Prefix',
   guildOnly: true,
   async execute(message, args) {
+    if (!args.length) {
+      return message.reply('Please provide a prefix.');
+    }
     await mongo().then(async (mongoose) => {
       try {
         const guildId = message.guild.id;
