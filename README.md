@@ -79,6 +79,7 @@ A cool multi purpose discord bot with commands for Fun, Moderation, Utility, Eco
 | SetRule    | Sets the rules-and-info channel for the server | !setrule [Channel Tag]    | !setrule #rules      |
 | SetTicket  | Sets the ticket channel for the server         | !setticket [Channel Tag]  | !setticket #ticket   |
 | SetWelcome | Sets the welcome channel for the server        | !setwelcome [Channel Tag] | !setwelcome #welcome |
+| SetLevel   | Sets the level-logs channel for the server     | !setlevel [Channel Tag]   | !setlevel #level     |
 
 ## Testing
 
