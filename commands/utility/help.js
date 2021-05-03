@@ -65,7 +65,11 @@ module.exports = {
     data.push(`Name: ${command.name}`);
     if (command.description) data.push(`Description: ${command.description}`);
     if (command.usage)
-      data.push(`Usage: ${prefix}${command.name} ${command.usage}\n`);
+      data.push(
+        `Usage: ${prefix[message.guild.id.toString() || globalPrefix]}${
+          command.name
+        } ${command.usage}\n`
+      );
 
     data.push(`Cooldown: ${command.cooldown || 3}second(s)`);
     message.channel.send(data, { split: true });

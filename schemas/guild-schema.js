@@ -16,6 +16,7 @@ const guildSchema = mongoose.Schema({
   ticket: defString,
   polls: defString,
   leave: defString,
+  level: defString,
 });
 
 module.exports = mongoose.model('guildInfo', guildSchema);

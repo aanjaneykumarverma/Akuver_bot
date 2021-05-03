@@ -8,6 +8,7 @@ const guildRoles = {};
 const guildTickets = {};
 const guildPolls = {};
 const guildLeaves = {};
+const guildLevels = {};
 
 module.exports.loadData = async (client) => {
   await mongo().then(async (mongoose) => {
@@ -37,6 +38,7 @@ module.exports.loadData = async (client) => {
         guildTickets[guildId] = result.ticket;
         guildPolls[guildId] = result.polls;
         guildLeaves[guildId] = result.leave;
+        guildLevels[guildId] = result.levels;
       }
     } catch (err) {
       console.log(err, 'ERROR!');
@@ -61,6 +63,8 @@ module.exports.updateCache = (guildId, command, data) => {
     guildPolls[guildId] = data;
   } else if (command === 'setleave') {
     guildLeaves[guildId] = data;
+  } else if (command === 'setlevel') {
+    guildLevels[guildId] = data;
   }
 };
 
@@ -71,3 +75,4 @@ module.exports.role = guildRoles;
 module.exports.poll = guildPolls;
 module.exports.ticket = guildTickets;
 module.exports.leave = guildLeaves;
+module.exports.level = guildLevels;

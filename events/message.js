@@ -1,5 +1,5 @@
 const { prefix: globalPrefix } = require('../config.json');
-const { prefix } = require('../util/update.js');
+const { prefix, level } = require('../util/update.js');
 const Discord = require('discord.js');
 const cooldowns = new Discord.Collection();
 const mongo = require('../util/mongo.js');
@@ -18,7 +18,6 @@ module.exports = {
         await currency.addCoins(guild.id, member.id, coinsToAdd);
       }
     }
-    console.log(guild.id);
     if (
       !message.content.startsWith(
         prefix[guild.id.toString()] || globalPrefix
@@ -106,7 +105,12 @@ const addXP = async (guildId, userId, xpToAdd, message) => {
       if (xp >= needed) {
         level++;
         xp -= needed;
-        message.reply(`Congrats for advancing to level ${level}.`);
+        if (typeof level[guildId] !== 'undefined') {
+          const channel = message.guild.channels.cache.get(level[guildId]);
+          message.channel.send(
+            `Congrats <@${userId}> for advancing to level ${level}.`
+          );
+        }
         await profileSchema.updateOne(
           {
             guildId,
