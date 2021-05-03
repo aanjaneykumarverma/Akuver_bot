@@ -1,6 +1,6 @@
 {
   "name": "akuverbot",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "description": "A Discord Bot For Learning Purposes",
   "main": "bot.js",
   "scripts": {

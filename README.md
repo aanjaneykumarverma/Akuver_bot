@@ -89,8 +89,8 @@ A cool multi purpose discord bot with commands for Fun, Moderation, Utility, Eco
 
 ## Games
 
-| Name            | Description                                    | Usage                      | Example            |
-| --------------- | ---------------------------------------------- | -------------------------- | ------------------ |
-| Tictactoe       | Play Tic-tac-toe with the mentioned user       | !tictactoe [Mention or ID] | !tictactoe @Akuver |
-| AmongUsCategory | Sets a category for Among Us voice channel.    | !aucatset [Category Name]  | !aucatset hola     |
-| AmongUs         | Makes it easier to play among us with friends. | !au [Region][code]         | !au US 223344      |
+| Name            | Description                                    | Usage                     | Example        |
+| --------------- | ---------------------------------------------- | ------------------------- | -------------- |
+| Tictactoe       | Play Tic-tac-toe with the mentioned user       | !ttt [Mention or ID]      | !ttt @Akuver   |
+| AmongUsCategory | Sets a category for Among Us voice channel.    | !aucatset [Category Name] | !aucatset hola |
+| AmongUs         | Makes it easier to play among us with friends. | !au [Region][code]        | !au US 223344  |
