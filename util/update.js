@@ -38,7 +38,7 @@ module.exports.loadData = async (client) => {
         guildTickets[guildId] = result.ticket;
         guildPolls[guildId] = result.polls;
         guildLeaves[guildId] = result.leave;
-        guildLevels[guildId] = result.levels;
+        guildLevels[guildId] = result.level;
       }
     } catch (err) {
       console.log(err, 'ERROR!');

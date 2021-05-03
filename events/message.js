@@ -1,5 +1,5 @@
 const { prefix: globalPrefix } = require('../config.json');
-const { prefix, level } = require('../util/update.js');
+const { prefix, level: levelchannel } = require('../util/update.js');
 const Discord = require('discord.js');
 const cooldowns = new Discord.Collection();
 const mongo = require('../util/mongo.js');
@@ -105,8 +105,12 @@ const addXP = async (guildId, userId, xpToAdd, message) => {
       if (xp >= needed) {
         level++;
         xp -= needed;
-        if (typeof level[guildId] !== 'undefined') {
-          const channel = message.guild.channels.cache.get(level[guildId]);
+
+        if (typeof levelchannel[guildId.toString()] !== 'undefined') {
+          console.log('Yay!');
+          const channel = message.guild.channels.cache.get(
+            levelchannel[guildId.toString()].toString()
+          );
           channel.send(
             `Congrats <@${userId}> for advancing to level ${level}.`
           );
