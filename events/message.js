@@ -107,7 +107,7 @@ const addXP = async (guildId, userId, xpToAdd, message) => {
         xp -= needed;
         if (typeof level[guildId] !== 'undefined') {
           const channel = message.guild.channels.cache.get(level[guildId]);
-          message.channel.send(
+          channel.send(
             `Congrats <@${userId}> for advancing to level ${level}.`
           );
         }
