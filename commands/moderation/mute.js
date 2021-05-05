@@ -35,59 +35,64 @@ module.exports = {
       );
       return;
     }
-    const mongoose = await mongo();
-    const previousMutes = await muteSchema.find({
-      userId: target.id,
-    });
-    console.log(previousMutes);
-    const currentlyMuted = previousMutes.filter((mute) => {
-      return mute.current === true;
-    });
-    console.log(currentlyMuted);
-    if (currentlyMuted.length) {
-      message.reply('That user is already muted.');
-      mongoose.connection.close();
-      return;
-    }
-    let duration = reasons[reason] * (previousMutes.length + 1);
-    const expires = new Date();
-    expires.setHours(expires.getHours() + duration);
-    const mutedRole = guild.roles.cache.find((role) => {
-      return role.name === 'Muted';
-    });
-    if (!mutedRole) {
-      message.reply('Could not find a "Muted" role.');
-      mongoose.connection.close();
-      return;
-    }
-    const targetMember = (await guild.members.fetch()).get(target.id);
-    let curRoles = '';
-    guild.roles.cache.find((role) => {
-      if (
-        role.name !== 'Muted' &&
-        role.name !== '@everyone' &&
-        targetMember.roles.cache.has(role.id)
-      ) {
-        curRoles += `${role.name} ,`;
-        targetMember.roles.remove(role);
+    try {
+      const mongoose = await mongo();
+      const previousMutes = await muteSchema.find({
+        userId: target.id,
+      });
+      console.log(previousMutes);
+      const currentlyMuted = previousMutes.filter((mute) => {
+        return mute.current === true;
+      });
+      console.log(currentlyMuted);
+      if (currentlyMuted.length) {
+        message.reply('That user is already muted.');
+        mongoose.connection.close();
+        return;
       }
-    });
-    curRoles = curRoles.substr(0, curRoles.length - 2);
-    targetMember.roles.add(mutedRole);
-    await new muteSchema({
-      userId: target.id,
-      guildId: guild.id,
-      reason,
-      staffId: staff.id,
-      staffTag: staff.username,
-      curRoles,
-      expires,
-      current: true,
-    }).save();
-    mongoose.connection.close();
-
-    message.reply(
-      `You muted <@${target.id}> for "${reason}". They will be unmuted in ${duration} hours.`
-    );
+      let duration = reasons[reason] * (previousMutes.length + 1);
+      const expires = new Date();
+      expires.setHours(expires.getHours() + duration);
+      const mutedRole = guild.roles.cache.find((role) => {
+        return role.name === 'Muted';
+      });
+      if (!mutedRole) {
+        message.reply('Could not find a "Muted" role.');
+        mongoose.connection.close();
+        return;
+      }
+      const targetMember = (await guild.members.fetch()).get(target.id);
+      let curRoles = '';
+      guild.roles.cache.find((role) => {
+        if (
+          role.name !== 'Muted' &&
+          role.name !== '@everyone' &&
+          targetMember.roles.cache.has(role.id)
+        ) {
+          curRoles += `${role.name} ,`;
+          targetMember.roles.remove(role);
+        }
+      });
+      curRoles = curRoles.substr(0, curRoles.length - 2);
+      targetMember.roles.add(mutedRole);
+      await new muteSchema({
+        userId: target.id,
+        guildId: guild.id,
+        reason,
+        staffId: staff.id,
+        staffTag: staff.username,
+        curRoles,
+        expires,
+        current: true,
+      }).save();
+      message.reply(
+        `You muted <@${target.id}> for "${reason}". They will be unmuted in ${duration} hours.`
+      );
+    } catch (err) {
+      console.log(err.message);
+      throw err;
+    } finally {
+      mongoose.connection.close();
+    }
   },
 };

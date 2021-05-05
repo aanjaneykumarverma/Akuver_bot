@@ -33,6 +33,8 @@ module.exports.addCoins = async (guildId, userId, coins) => {
       coinsCache[`${guildId}-${userId}`] = result.coins;
 
       return result.coins;
+    } catch (err) {
+      console.log(err.message);
     } finally {
       mongoose.connection.close();
     }
@@ -71,6 +73,8 @@ module.exports.getCoins = async (guildId, userId) => {
       coinsCache[`${guildId}-${userId}`] = coins;
 
       return coins;
+    } catch (err) {
+      console.log(err.message);
     } finally {
       mongoose.connection.close();
     }
@@ -87,6 +91,8 @@ module.exports.sort = async (guildId, max) => {
         .limit(max);
       console.log('All:', all);
       return all;
+    } catch (err) {
+      console.log(err.message);
     } finally {
       mongoose.connection.close();
     }

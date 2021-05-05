@@ -32,6 +32,8 @@ module.exports = async (client) => {
     await mongo().then(async (mongoose) => {
       try {
         const results = await scheduledSchema.deleteMany(query);
+      } catch (err) {
+        console.log(err.message);
       } finally {
         mongoose.connection.close();
       }
