@@ -33,6 +33,9 @@ module.exports = {
           `The role-claim channel for this server is ${channel} now.`
         );
         updateCache(guildId, 'setrole', role);
+      } catch (err) {
+        console.log(err.message);
+        throw err;
       } finally {
         mongoose.connection.close();
       }

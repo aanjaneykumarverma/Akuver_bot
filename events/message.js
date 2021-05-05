@@ -33,7 +33,9 @@ module.exports = {
     const client = message.client;
     if (!client.commands.has(commandName) && channel.name !== 'testing') {
       message.reply(
-        'Invalid commnand. Send !help to get a list of all possible commands.'
+        `Invalid command. Send ${
+          prefix[guild.id.toString()] || globalPrefix
+        }help to get a list of all possible commands.`
       );
       return;
     }

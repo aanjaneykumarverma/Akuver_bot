@@ -33,6 +33,9 @@ module.exports = {
           `The rules and info channel for this server is ${channel} now.`
         );
         updateCache(guildId, 'setrule', rules);
+      } catch (err) {
+        console.log(err.message);
+        throw err;
       } finally {
         mongoose.connection.close();
       }

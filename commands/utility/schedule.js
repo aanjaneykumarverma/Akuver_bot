@@ -45,19 +45,24 @@ module.exports = {
       time: 1000 * 60,
     });
     collector.on('end', async (collected) => {
-      const collectedMessage = collected.first();
-      if (!collectedMessage) {
-        message.reply('You did not reply in time.');
-        return;
+      try {
+        const collectedMessage = collected.first();
+        if (!collectedMessage) {
+          message.reply('You did not reply in time.');
+          return;
+        }
+        const result = await new scheduledSchema({
+          date: targetDate.valueOf(),
+          content: collectedMessage.content,
+          guildId: guild.id,
+          channelId: targetChannel.id,
+        }).save();
+        console.log(result);
+        message.reply('Your message has been scheduled.');
+      } catch (err) {
+        console.log(err.message);
+        throw err;
       }
-      const result = await new scheduledSchema({
-        date: targetDate.valueOf(),
-        content: collectedMessage.content,
-        guildId: guild.id,
-        channelId: targetChannel.id,
-      }).save();
-      console.log(result);
-      message.reply('Your message has been scheduled.');
     });
   },
 };

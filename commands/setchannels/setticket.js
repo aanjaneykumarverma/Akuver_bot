@@ -31,6 +31,9 @@ module.exports = {
         );
         message.reply(`The ticket channel for this server is ${channel} now.`);
         updateCache(guildId, 'setticket', ticket);
+      } catch (err) {
+        console.log(err.message);
+        throw err;
       } finally {
         mongoose.connection.close();
       }

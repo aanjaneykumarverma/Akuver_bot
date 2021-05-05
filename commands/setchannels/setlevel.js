@@ -33,6 +33,9 @@ module.exports = {
           `The level-logs channel for this server is ${channel} now.`
         );
         updateCache(guildId, 'setlevel', level);
+      } catch (err) {
+        console.log(err.message);
+        throw err;
       } finally {
         mongoose.connection.close();
       }

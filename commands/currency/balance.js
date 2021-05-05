@@ -10,7 +10,12 @@ module.exports = {
     const targetId = target.id;
     const guildId = message.guild.id;
     const userId = target.id;
-    const coins = await currency.getCoins(guildId, userId);
-    message.reply(`That user has ${coins} coins!`);
+    try {
+      const coins = await currency.getCoins(guildId, userId);
+      message.reply(`That user has ${coins} coins!`);
+    } catch (err) {
+      console.log(err.message);
+      throw err;
+    }
   },
 };

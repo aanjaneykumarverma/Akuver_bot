@@ -11,6 +11,7 @@ module.exports = {
   description: 'Mutes a user',
   usage: ' @user reason',
   permissions: 'ADMINISTRATOR',
+  async: true,
   async execute(message, args) {
     const { guild, author: staff } = message;
     if (args.length !== 2) {

@@ -31,6 +31,9 @@ module.exports = {
         );
         message.reply(`The welcome channel for this server is ${channel} now.`);
         updateCache(guildId, 'setwelcome', welcome);
+      } catch (err) {
+        console.log(err.message);
+        throw err;
       } finally {
         mongoose.connection.close();
       }

@@ -15,18 +15,23 @@ module.exports = {
       message.reply('Please specify a category Name.');
       return;
     }
-    await amongUsCategorySchema.findOneAndUpdate(
-      {
-        _id: message.guild.id,
-      },
-      {
-        _id: message.guild.id,
-        categoryId: category.id,
-      },
-      {
-        upsert: true,
-      }
-    );
-    message.reply('Among us category set!');
+    try {
+      await amongUsCategorySchema.findOneAndUpdate(
+        {
+          _id: message.guild.id,
+        },
+        {
+          _id: message.guild.id,
+          categoryId: category.id,
+        },
+        {
+          upsert: true,
+        }
+      );
+      message.reply('Among us category set!');
+    } catch (err) {
+      console.log(err.message);
+      throw err;
+    }
   },
 };

@@ -13,33 +13,38 @@ module.exports = {
       return;
     }
     const { channel, guild, member } = message;
-    const categoryDocument = await amongUsCategorySchema.findOne({
-      _id: guild.id,
-    });
-    if (!categoryDocument) {
-      message.reply(
-        'An Among Us category has not been set within this server.'
-      );
-      return;
-    }
-    const channelName = `${channelNameStart} ${code}`;
-    await guild.channels.create(channelName, {
-      type: 'voice',
-      userLimit: 10,
-      parent: categoryDocument.categoryId,
-    });
-    const embed = new Discord.MessageEmbed()
-      .setColor('#0099ff')
-      .setAuthor(
-        member.nickname || member.displayName,
-        member.user.displayAvatarURL()
-      )
-      .setDescription(
-        `${member} created a new Among Us game! Join channel "${channelName}"`
-      )
-      .addField('Region', region)
-      .addField('Game code', code);
+    try {
+      const categoryDocument = await amongUsCategorySchema.findOne({
+        _id: guild.id,
+      });
+      if (!categoryDocument) {
+        message.reply(
+          'An Among Us category has not been set within this server.'
+        );
+        return;
+      }
+      const channelName = `${channelNameStart} ${code}`;
+      await guild.channels.create(channelName, {
+        type: 'voice',
+        userLimit: 10,
+        parent: categoryDocument.categoryId,
+      });
+      const embed = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setAuthor(
+          member.nickname || member.displayName,
+          member.user.displayAvatarURL()
+        )
+        .setDescription(
+          `${member} created a new Among Us game! Join channel "${channelName}"`
+        )
+        .addField('Region', region)
+        .addField('Game code', code);
 
-    channel.send(embed);
+      channel.send(embed);
+    } catch (err) {
+      console.log(err.message);
+      throw err;
+    }
   },
 };

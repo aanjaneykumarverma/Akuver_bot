@@ -44,6 +44,10 @@ module.exports = {
         message.reply(
           'Your ticket has been sent! Expect a reply within 24 hours.'
         );
+      })
+      .catch((err) => {
+        console.log(err.message);
+        throw err;
       });
   },
 };

@@ -30,6 +30,9 @@ module.exports = {
         );
         message.reply(`The prefix for this bot is ${prefix} now.`);
         updateCache(guildId, 'setprefix', prefix);
+      } catch (err) {
+        console.log(err.message);
+        throw err;
       } finally {
         mongoose.connection.close();
       }

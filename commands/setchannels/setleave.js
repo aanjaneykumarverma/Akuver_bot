@@ -31,6 +31,9 @@ module.exports = {
         );
         message.reply(`The leave channel for this server is ${channel} now.`);
         updateCache(guildId, 'setleave', leave);
+      } catch (err) {
+        console.log(err.message);
+        throw err;
       } finally {
         mongoose.connection.close();
       }

@@ -6,6 +6,7 @@ module.exports = {
   description: 'Unmutes a user.',
   usage: ' @user',
   permissions: 'ADMINISTRATOR',
+  async: true,
   async execute(message, args) {
     const { guild } = message;
     if (args.length != 1) {

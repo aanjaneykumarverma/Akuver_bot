@@ -31,6 +31,9 @@ module.exports = {
         );
         message.reply(`The polls channel for this server is ${channel} now.`);
         updateCache(guildId, 'setpoll', polls);
+      } catch (err) {
+        console.log(err.message);
+        throw err;
       } finally {
         mongoose.connection.close();
       }
