@@ -81,7 +81,10 @@ module.exports.sort = async (guildId, max) => {
   return await mongo().then(async (mongoose) => {
     try {
       console.log('Running sort query');
-      const all = await profileSchema.find().sort({ coins: 'desc' }).limit(max);
+      const all = await profileSchema
+        .find({ guildId: guildId })
+        .sort({ coins: 'desc' })
+        .limit(max);
       console.log('All:', all);
       return all;
     } finally {
