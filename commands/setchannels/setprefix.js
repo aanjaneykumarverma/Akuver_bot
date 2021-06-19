@@ -1,4 +1,3 @@
-const mongo = require('../../util/mongo.js');
 const guildSchema = require('../../schemas/guild-schema.js');
 const { updateCache } = require('../../util/update.js');
 module.exports = {
@@ -12,30 +11,27 @@ module.exports = {
     if (!args.length) {
       return message.reply('Please provide a prefix.');
     }
-    await mongo().then(async (mongoose) => {
-      try {
-        const guildId = message.guild.id;
-        const prefix = args[0];
-        await guildSchema.findOneAndUpdate(
-          {
-            _id: guildId,
-          },
-          {
-            _id: guildId,
-            prefix: prefix,
-          },
-          {
-            upsert: true,
-          }
-        );
-        message.reply(`The prefix for this bot is ${prefix} now.`);
-        updateCache(guildId, 'setprefix', prefix);
-      } catch (err) {
-        console.log(err.message);
-        throw err;
-      } finally {
-        mongoose.connection.close();
-      }
-    });
+
+    try {
+      const guildId = message.guild.id;
+      const prefix = args[0];
+      await guildSchema.findOneAndUpdate(
+        {
+          _id: guildId,
+        },
+        {
+          _id: guildId,
+          prefix: prefix,
+        },
+        {
+          upsert: true,
+        }
+      );
+      message.reply(`The prefix for this bot is ${prefix} now.`);
+      updateCache(guildId, 'setprefix', prefix);
+    } catch (err) {
+      console.log(err.message);
+      throw err;
+    }
   },
 };

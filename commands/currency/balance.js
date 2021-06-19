@@ -5,6 +5,7 @@ module.exports = {
   description: 'Returns the balance of the user.',
   usage: ' @member(optional)',
   cooldown: 5,
+  guildOnly: true,
   async execute(message, args) {
     const target = message.mentions.users.first() || message.author;
     const targetId = target.id;

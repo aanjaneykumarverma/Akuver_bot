@@ -5,6 +5,7 @@ module.exports = {
   description: 'Displays the avatar of the user',
   usage: ' @user(optional)',
   cooldown: 8,
+  guildOnly: true,
   execute(message, args) {
     const target = message.mentions.members.first() || message.author;
     const avatar = target.user.displayAvatarURL({

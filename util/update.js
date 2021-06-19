@@ -1,4 +1,3 @@
-const mongo = require('./mongo.js');
 const guildSchema = require('../schemas/guild-schema.js');
 const { prefix } = require('../config.json');
 const guildPrefixes = {};
@@ -11,41 +10,37 @@ const guildLeaves = {};
 const guildLevels = {};
 
 module.exports.loadData = async (client) => {
-  await mongo().then(async (mongoose) => {
-    try {
-      for (const guild of client.guilds.cache) {
-        const guildId = guild[1].id;
-        let result = await guildSchema.findOne({ _id: guildId });
-        if (!result) {
-          result = await guildSchema.findOneAndUpdate(
-            {
-              _id: guildId,
-            },
-            {
-              _id: guildId,
-              prefix: prefix,
-            },
-            {
-              upsert: true, //update+insert
-              new: true, // return the updated value; not the old one.
-            }
-          );
-        }
-        guildPrefixes[guildId] = result.prefix;
-        guildWelcomes[guildId] = result.welcome;
-        guildRules[guildId] = result.rules;
-        guildRoles[guildId] = result.role;
-        guildTickets[guildId] = result.ticket;
-        guildPolls[guildId] = result.polls;
-        guildLeaves[guildId] = result.leave;
-        guildLevels[guildId] = result.level;
+  try {
+    for (const guild of client.guilds.cache) {
+      const guildId = guild[1].id;
+      let result = await guildSchema.findOne({ _id: guildId });
+      if (!result) {
+        result = await guildSchema.findOneAndUpdate(
+          {
+            _id: guildId,
+          },
+          {
+            _id: guildId,
+            prefix: prefix,
+          },
+          {
+            upsert: true, //update+insert
+            new: true, // return the updated value; not the old one.
+          }
+        );
       }
-    } catch (err) {
-      console.log(err, 'ERROR!');
-    } finally {
-      mongoose.connection.close();
+      guildPrefixes[guildId] = result.prefix;
+      guildWelcomes[guildId] = result.welcome;
+      guildRules[guildId] = result.rules;
+      guildRoles[guildId] = result.role;
+      guildTickets[guildId] = result.ticket;
+      guildPolls[guildId] = result.polls;
+      guildLeaves[guildId] = result.leave;
+      guildLevels[guildId] = result.level;
     }
-  });
+  } catch (err) {
+    console.log(err, 'ERROR!');
+  }
 };
 
 module.exports.updateCache = (guildId, command, data) => {

@@ -6,6 +6,7 @@ module.exports = {
   description: "Converts a user's avatar in wanted meme !!",
   usage: ' @user',
   cooldown: 8,
+  guildOnly: true,
   async execute(message, args) {
     const user = message.mentions.members.first();
 

@@ -2,7 +2,6 @@ const { prefix: globalPrefix } = require('../config.json');
 const { prefix, level: levelchannel } = require('../util/update.js');
 const Discord = require('discord.js');
 const cooldowns = new Discord.Collection();
-const mongo = require('../util/mongo.js');
 const profileSchema = require('../schemas/profile-schema.js');
 const currency = require('../features/currency.js');
 
@@ -12,30 +11,24 @@ module.exports = {
     const { guild, member, channel } = message;
     const xpToAdd = Math.floor(Math.random() * 11);
     const coinsToAdd = Math.floor(Math.random() * 6);
+    let prefix_guild = globalPrefix;
     if (channel.type !== 'dm') {
       if (!message.author.bot) {
-        addXP(guild.id, member.id, xpToAdd, message);
+        await addXP(guild.id, member.id, xpToAdd, message);
         await currency.addCoins(guild.id, member.id, coinsToAdd);
+        prefix_guild = prefix[guild.id.toString()]
+          ? prefix[guild.id.toString()]
+          : globalPrefix;
       }
     }
-    if (
-      !message.content.startsWith(
-        prefix[guild.id.toString()] || globalPrefix
-      ) ||
-      message.author.bot
-    )
-      return;
-    const args = message.content
-      .slice(prefix[guild.id.toString()].length || globalPrefix.length)
-      .trim()
-      .split(/ +/); // trim removes whitespaces from both sides of string
+    if (!message.content.startsWith(prefix_guild) || message.author.bot) return;
+
+    const args = message.content.slice(prefix_guild.length).trim().split(/ +/); // trim removes whitespaces from both sides of string
     const commandName = args.shift().toLowerCase();
     const client = message.client;
     if (!client.commands.has(commandName) && channel.name !== 'testing') {
       message.reply(
-        `Invalid command. Send ${
-          prefix[guild.id.toString()] || globalPrefix
-        }help to get a list of all possible commands.`
+        `Invalid command. Send ${prefix_guild}help to get a list of all possible commands.`
       );
       return;
     }
@@ -83,54 +76,49 @@ module.exports = {
 const getNeededXP = (level) => level * level * 100;
 const addXP = async (guildId, userId, xpToAdd, message) => {
   if (message.author.bot) return;
-  await mongo().then(async (mongoose) => {
-    try {
-      const result = await profileSchema.findOneAndUpdate(
+  try {
+    const result = await profileSchema.findOneAndUpdate(
+      {
+        guildId,
+        userId,
+      },
+      {
+        guildId,
+        userId,
+        $inc: {
+          xp: xpToAdd,
+        },
+      },
+      {
+        upsert: true, //update+insert
+        new: true, // return the updated value; not the old one.
+      }
+    );
+    let { xp, level } = result;
+    const needed = getNeededXP(level);
+    if (xp >= needed) {
+      level++;
+      xp -= needed;
+
+      if (levelchannel[guildId.toString()]) {
+        const channel = message.guild.channels.cache.get(
+          levelchannel[guildId.toString()].toString()
+        );
+        channel.send(`Congrats <@${userId}> for advancing to level ${level}.`);
+      }
+      await profileSchema.updateOne(
         {
           guildId,
           userId,
         },
         {
-          guildId,
-          userId,
-          $inc: {
-            xp: xpToAdd,
-          },
-        },
-        {
-          upsert: true, //update+insert
-          new: true, // return the updated value; not the old one.
+          level,
+          xp,
         }
       );
-      let { xp, level } = result;
-      const needed = getNeededXP(level);
-      if (xp >= needed) {
-        level++;
-        xp -= needed;
-
-        if (typeof levelchannel[guildId.toString()] !== 'undefined') {
-          console.log('Yay!');
-          const channel = message.guild.channels.cache.get(
-            levelchannel[guildId.toString()].toString()
-          );
-          channel.send(
-            `Congrats <@${userId}> for advancing to level ${level}.`
-          );
-        }
-        await profileSchema.updateOne(
-          {
-            guildId,
-            userId,
-          },
-          {
-            level,
-            xp,
-          }
-        );
-      }
-    } finally {
-      mongoose.connection.close();
     }
-  });
+  } catch (err) {
+    console.log(err, 'ERROR!');
+  }
 };
 module.exports.addXP = addXP;

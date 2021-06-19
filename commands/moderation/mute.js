@@ -1,4 +1,3 @@
-const mongo = require('../../util/mongo.js');
 const muteSchema = require('../../schemas/mute-schema.js');
 
 const reasons = {
@@ -12,6 +11,7 @@ module.exports = {
   usage: ' @user reason',
   permissions: 'ADMINISTRATOR',
   async: true,
+  guildOnly: true,
   async execute(message, args) {
     const { guild, author: staff } = message;
     if (args.length !== 2) {
@@ -36,7 +36,6 @@ module.exports = {
       return;
     }
     try {
-      const mongoose = await mongo();
       const previousMutes = await muteSchema.find({
         userId: target.id,
       });
@@ -47,7 +46,6 @@ module.exports = {
       console.log(currentlyMuted);
       if (currentlyMuted.length) {
         message.reply('That user is already muted.');
-        mongoose.connection.close();
         return;
       }
       let duration = reasons[reason] * (previousMutes.length + 1);
@@ -58,7 +56,6 @@ module.exports = {
       });
       if (!mutedRole) {
         message.reply('Could not find a "Muted" role.');
-        mongoose.connection.close();
         return;
       }
       const targetMember = (await guild.members.fetch()).get(target.id);
@@ -91,8 +88,6 @@ module.exports = {
     } catch (err) {
       console.log(err.message);
       throw err;
-    } finally {
-      mongoose.connection.close();
     }
   },
 };

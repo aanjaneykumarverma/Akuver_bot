@@ -5,9 +5,13 @@ module.exports = {
   description: 'lists all valid commands with their usage.',
   usage: ' ',
   cooldown: 5,
+  guildOnly: true,
   execute(message, args) {
     const data = [];
     const { commands } = message.client;
+    const prefix_guild = prefix[message.guild.id.toString()]
+      ? prefix[message.guild.id.toString()]
+      : globalPrefix;
     if (!args.length) {
       data.push('Here is a list of all of my commands:\n');
       for (let command of commands) {
@@ -32,22 +36,16 @@ module.exports = {
         const mainCommand = command.name;
         const usage = command.usage ? `${command.usage}` : '';
         const { description } = command;
-        data.push(
-          `${
-            prefix[message.guild.id.toString()] || globalPrefix
-          }${mainCommand}${usage} = ${description}\n`
-        );
+        data.push(`${prefix_guild}${mainCommand}${usage} = ${description}\n`);
       }
       data.push(
-        `\nYou can send \`${
-          prefix[message.guild.id.toString()] || globalPrefix
-        }help command_name\` to get info on a specific command!`
+        `\nYou can send \`${prefix_guild}help command_name\` to get info on a specific command!`
       );
       return message.author
         .send(data, { split: true, code: true })
         .then(() => {
           // splits msgs into 2 or more if charlength>2000
-          if (message.channel.type == 'dm') return;
+          if (message.channel.type === 'dm') return;
           message.reply("I've sent you a DM with all my commands.");
         })
         .catch((error) => {
@@ -58,6 +56,7 @@ module.exports = {
 
     const name = args[0].toLowerCase();
     const command = message.client.commands.get(name);
+
     if (!command) {
       return message.reply("That's not a valid command.");
     }
@@ -65,11 +64,7 @@ module.exports = {
     data.push(`Name: ${command.name}`);
     if (command.description) data.push(`Description: ${command.description}`);
     if (command.usage)
-      data.push(
-        `Usage: ${prefix[message.guild.id.toString() || globalPrefix]}${
-          command.name
-        } ${command.usage}\n`
-      );
+      data.push(`Usage: ${prefix_guild}${command.name} ${command.usage}\n`);
 
     data.push(`Cooldown: ${command.cooldown || 3}second(s)`);
     message.channel.send(data, { split: true });

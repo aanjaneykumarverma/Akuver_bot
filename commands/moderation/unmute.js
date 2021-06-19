@@ -1,4 +1,3 @@
-const mongo = require('../../util/mongo.js');
 const muteSchema = require('../../schemas/mute-schema.js');
 
 module.exports = {
@@ -7,6 +6,7 @@ module.exports = {
   usage: ' @user',
   permissions: 'ADMINISTRATOR',
   async: true,
+  guildOnly: true,
   async execute(message, args) {
     const { guild } = message;
     if (args.length != 1) {
@@ -21,7 +21,6 @@ module.exports = {
     }
     id = target.id;
     try {
-      const mongoose = await mongo();
       const result = await muteSchema.updateOne(
         {
           guildId: guild.id,
@@ -61,8 +60,6 @@ module.exports = {
     } catch (err) {
       console.log(err.message);
       throw err;
-    } finally {
-      mongoose.connection.close();
     }
   },
 };

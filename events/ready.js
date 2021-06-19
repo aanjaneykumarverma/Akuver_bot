@@ -9,13 +9,7 @@ module.exports = {
   once: true,
   async execute(client) {
     console.log("I'm ready now!");
-    await mongo().then((mongoose) => {
-      try {
-        console.log('Connected to mongo!');
-      } finally {
-        mongoose.connection.close();
-      }
-    });
+    mongo();
     await loadData(client);
     for (const file of featuresFiles) {
       const feature = require(`../features/${file}`);

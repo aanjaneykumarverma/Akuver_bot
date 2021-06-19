@@ -1,4 +1,3 @@
-const mongo = require('../../util/mongo.js');
 const guildSchema = require('../../schemas/guild-schema.js');
 const { updateCache } = require('../../util/update.js');
 module.exports = {
@@ -13,30 +12,27 @@ module.exports = {
     if (!channel) {
       return message.reply('Please mention a valid channel.');
     }
-    await mongo().then(async (mongoose) => {
-      try {
-        const guildId = message.guild.id;
-        const leave = channel.id.toString();
-        await guildSchema.findOneAndUpdate(
-          {
-            _id: guildId,
-          },
-          {
-            _id: guildId,
-            leave: leave,
-          },
-          {
-            upsert: true,
-          }
-        );
-        message.reply(`The leave channel for this server is ${channel} now.`);
-        updateCache(guildId, 'setleave', leave);
-      } catch (err) {
-        console.log(err.message);
-        throw err;
-      } finally {
-        mongoose.connection.close();
-      }
-    });
+
+    try {
+      const guildId = message.guild.id;
+      const leave = channel.id.toString();
+      await guildSchema.findOneAndUpdate(
+        {
+          _id: guildId,
+        },
+        {
+          _id: guildId,
+          leave: leave,
+        },
+        {
+          upsert: true,
+        }
+      );
+      message.reply(`The leave channel for this server is ${channel} now.`);
+      updateCache(guildId, 'setleave', leave);
+    } catch (err) {
+      console.log(err.message);
+      throw err;
+    }
   },
 };
