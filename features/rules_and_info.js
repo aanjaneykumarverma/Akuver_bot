@@ -28,6 +28,9 @@ module.exports = (client) => {
         `**Verify yourself and claim roles in <#${role[guild.toString()]}>**`
       );
       text.push(`**Send ${prefix_guild}help to get the list of commands. **`);
+      text.push(
+        `**Always use ${globalPrefix} before your commands while DMing the bot & not your server prefix. **`
+      );
       text.join('\n');
       firstMsg(client, rules[guild.toString()], text);
     }
