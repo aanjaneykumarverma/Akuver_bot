@@ -1,4 +1,4 @@
-const currency = require('../../features/currency.js');
+const currency = require('../../features/currency');
 
 module.exports = {
   name: 'bal',
@@ -11,15 +11,10 @@ module.exports = {
     const targetId = target.id;
     const guildId = message.guild.id;
     const userId = target.id;
-    try {
-      const coins = await currency.getCoins(guildId, userId);
-      const text = message.mentions.users.first()
-        ? `${target.username} has ${coins} coins!`
-        : `You have ${coins} coins!`;
-      message.reply(text);
-    } catch (err) {
-      console.log(err.message);
-      throw err;
-    }
+    const coins = await currency.getCoins(guildId, userId);
+    const text = message.mentions.users.first()
+      ? `${target.username} has ${coins} coins!`
+      : `You have ${coins} coins!`;
+    message.reply(text);
   },
 };

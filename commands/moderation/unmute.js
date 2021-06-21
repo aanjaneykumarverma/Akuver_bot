@@ -1,4 +1,4 @@
-const muteSchema = require('../../schemas/mute-schema.js');
+const muteSchema = require('../../schemas/mute-schema');
 
 module.exports = {
   name: 'unmute',

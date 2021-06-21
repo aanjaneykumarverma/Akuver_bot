@@ -1,5 +1,5 @@
 const { prefix: globalPrefix } = require('../../config.json');
-const { prefix } = require('../../util/update.js');
+const { prefix } = require('../../util/update');
 module.exports = {
   name: 'help',
   description: 'lists all valid commands with their usage.',

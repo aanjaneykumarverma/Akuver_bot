@@ -1,7 +1,8 @@
 const momentTimezone = require('moment-timezone');
 const { MessageCollector } = require('discord.js');
-const scheduledSchema = require('../../schemas/scheduled-schema.js');
-const mongo = require('../../util/mongo.js');
+const scheduledSchema = require('../../schemas/scheduled-schema');
+const factory = require('../../util/factory');
+
 module.exports = {
   name: 'schedule',
   description: 'Schedules a message.',
@@ -51,13 +52,12 @@ module.exports = {
           message.reply('You did not reply in time.');
           return;
         }
-        const result = await new scheduledSchema({
+        const result = await factory.createOne(scheduledSchema, {
           date: targetDate.valueOf(),
           content: collectedMessage.content,
           guildId: guild.id,
           channelId: targetChannel.id,
-        }).save();
-        console.log(result);
+        });
         message.reply('Your message has been scheduled.');
       } catch (err) {
         console.log(err.message);

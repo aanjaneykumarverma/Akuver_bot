@@ -1,4 +1,4 @@
-const { ticket } = require('../../util/update.js');
+const { ticket } = require('../../util/update');
 const check = '✅';
 let registered = false;
 
@@ -35,9 +35,7 @@ module.exports = {
     const text = args.join(' ');
     channel
       .send(
-        `A new ticket has been created by <@${member.id}>\n
-       "${text}"\n
-       Click the ${check} icon when this issue is resolved. `
+        `A new ticket has been created by <@${member.id}>\n"${text}"\nClick the ${check} icon when this issue is resolved.`
       )
       .then((ticketMessage) => {
         ticketMessage.react(check);

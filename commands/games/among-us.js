@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
-const amongUsCategorySchema = require('../../schemas/among-us-category-schema.js');
+const amongUsCategorySchema = require('../../schemas/among-us-category-schema');
+const factory = require('../../util/factory');
 const channelNameStart = 'Among Us';
+
 module.exports = {
   name: 'au',
   description: 'Makes it easier to play among us with friends.',
@@ -14,7 +16,7 @@ module.exports = {
     }
     const { channel, guild, member } = message;
     try {
-      const categoryDocument = await amongUsCategorySchema.findOne({
+      const categoryDocument = await factory.getOne(amongUsCategorySchema, {
         _id: guild.id,
       });
       if (!categoryDocument) {

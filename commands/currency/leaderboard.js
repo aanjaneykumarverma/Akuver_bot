@@ -1,4 +1,4 @@
-const currency = require('../../features/currency.js');
+const currency = require('../../features/currency');
 
 module.exports = {
   name: 'leaderboard',
