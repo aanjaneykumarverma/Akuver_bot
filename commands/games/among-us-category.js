@@ -5,6 +5,7 @@ module.exports = {
   description: 'Sets a category for Among Us voice channel.',
   usage: ' categoryName',
   guildOnly: true,
+  permissions: 'ADMINISTRATOR',
   async execute(message, args) {
     let categoryName = args;
     categoryName = categoryName.join(' ');
