@@ -1,6 +1,6 @@
-const firstMsg = require('../util/first_msg.js');
+const firstMsg = require('../util/first_msg');
 const { prefix: globalPrefix } = require('../config.json');
-const { rules, role, prefix } = require('../util/update.js');
+const { rules, role, prefix } = require('../util/update');
 module.exports = (client) => {
   const run = () => {
     const botId = '815474132182368256';

@@ -1,4 +1,4 @@
-const guildSchema = require('../schemas/guild-schema.js');
+const guildSchema = require('../schemas/guild-schema');
 const { prefix } = require('../config.json');
 const guildPrefixes = {};
 const guildWelcomes = {};

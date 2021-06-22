@@ -1,9 +1,9 @@
 const { prefix: globalPrefix } = require('../config.json');
-const { prefix, level: levelchannel } = require('../util/update.js');
+const { prefix, level: levelchannel } = require('../util/update');
 const Discord = require('discord.js');
 const cooldowns = new Discord.Collection();
-const profileSchema = require('../schemas/profile-schema.js');
-const currency = require('../features/currency.js');
+const profileSchema = require('../schemas/profile-schema');
+const currency = require('../features/currency');
 
 module.exports = {
   name: 'message',

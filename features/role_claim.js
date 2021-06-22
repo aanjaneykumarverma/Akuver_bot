@@ -1,5 +1,5 @@
-const firstMsg = require('../util/first_msg.js');
-const { role } = require('../util/update.js');
+const firstMsg = require('../util/first_msg');
+const { role } = require('../util/update');
 const emojis = {
   '🔒': 'Verified',
 };

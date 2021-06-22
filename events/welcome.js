@@ -1,7 +1,7 @@
 const Canvas = require('canvas');
 const { MessageAttachment } = require('discord.js');
 const path = require('path');
-const { welcome, rules } = require('../util/update.js');
+const { welcome, rules } = require('../util/update');
 module.exports = {
   name: 'guildMemberAdd',
   async execute(member, client) {

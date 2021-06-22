@@ -1,4 +1,4 @@
-const scheduledSchema = require('../schemas/scheduled-schema.js');
+const scheduledSchema = require('../schemas/scheduled-schema');
 module.exports.async = true;
 module.exports = async (client) => {
   const checkForPosts = async () => {

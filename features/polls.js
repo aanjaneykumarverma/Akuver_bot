@@ -1,5 +1,5 @@
-const { poll } = require('../util/update.js');
-const channels = ['826698915763060807', '825706248783003648']; //polls, testing
+const { poll } = require('../util/update');
+
 module.exports = (client) => {
   client.on('message', (message) => {
     const { channel, content } = message;

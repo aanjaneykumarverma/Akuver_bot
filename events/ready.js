@@ -1,5 +1,5 @@
-const mongo = require('../util/mongo.js');
-const { loadData } = require('../util/update.js');
+const mongo = require('../util/mongo');
+const { loadData } = require('../util/update');
 const fs = require('fs');
 const featuresFiles = fs
   .readdirSync('./features')

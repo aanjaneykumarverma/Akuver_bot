@@ -1,4 +1,4 @@
-const { leave } = require('../util/update.js');
+const { leave } = require('../util/update');
 
 module.exports = {
   name: 'guildMemberLeave',
