@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const currency = require('../../features/currency');
+const valid = ['red', 'green', 'blue'];
 module.exports = {
   name: 'roulette',
   description: 'Play roulette!',
@@ -10,7 +11,7 @@ module.exports = {
     let multiplier;
     let [colour, amount] = args;
     const random = Math.floor(Math.random() * 111);
-    if (!colour)
+    if (!colour || !valid.includes(colour))
       return message.reply(
         'Please select a colour. Red [2x] Green [4x] Blue [15x]'
       );
