@@ -57,6 +57,7 @@ A cool multi purpose discord bot with commands for Fun, Moderation, Utility, Eco
 | Balance     | Returns the balance of the user.     | !bal [Mention or ID(optional)]      | !bal @Akuver          |
 | Leaderboard | Displays the leaderboard (Top x)     | !leaderboard [x(Max 10)(optional)]  | !leaderboard 5        |
 | Transfer    | Transfers currency to mentioned user | !transfer [Currency][mention or id] | !transfer 500 @Akuver |
+| Roulette    | Play Roulette!                       | !roulette [Color][amount]           | !roulette blue 1000   |
 
 ## Misc
 
