@@ -28,3 +28,12 @@ exports.updateOne = async (Model, filter, data) => {
     console.error(err);
   }
 };
+
+exports.deleteOne = async (Model, filter) => {
+  try {
+    const doc = await Model.findOneAndDelete(filter);
+    return doc;
+  } catch (err) {
+    console.error(err);
+  }
+};

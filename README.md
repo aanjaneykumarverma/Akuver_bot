@@ -33,6 +33,7 @@ A cool multi purpose discord bot with commands for Fun, Moderation, Utility, Eco
 | Name     | Description                                 | Usage                                                            | Example                                   |
 | -------- | ------------------------------------------- | ---------------------------------------------------------------- | ----------------------------------------- |
 | Help     | Gives the list of all of bot's commands     | !help                                                            | !help                                     |
+| Leave    | Leaves the server                           | !leave                                                           | !leave                                    |
 | QR       | Sends QR code for the link provided         | !qr [Link]                                                       | !qr https://www.google.com                |
 | Schedule | Schedules a message                         | !schedule [Channel Tag][yyyy/mm/dd] [HH:MM][am or pm] [Timezone] | !schedule 2021/05/01 5:30 PM Asia/Kolkata |
 | Slow     | Sets the slowmode duration for a channel    | !slow [DURATION(s)][reason]                                      | !slow 15 COOLDOWN                         |

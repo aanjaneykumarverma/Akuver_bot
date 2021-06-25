@@ -1,4 +1,5 @@
 const guildSchema = require('../schemas/guild-schema');
+const { deleteOne } = require('./factory');
 const { prefix } = require('../config.json');
 const guildPrefixes = {};
 const guildWelcomes = {};
@@ -61,6 +62,18 @@ module.exports.updateCache = (guildId, command, data) => {
   } else if (command === 'setlevel') {
     guildLevels[guildId] = data;
   }
+};
+
+module.exports.clearData = async (guildId) => {
+  guildPrefixes[guildId] = null;
+  guildWelcomes[guildId] = null;
+  guildRules[guildId] = null;
+  guildRoles[guildId] = null;
+  guildPolls[guildId] = null;
+  guildTickets[guildId] = null;
+  guildLeaves[guildId] = null;
+  guildLevels[guildId] = null;
+  await deleteOne(guildSchema, { _id: guildId });
 };
 
 module.exports.prefix = guildPrefixes;
