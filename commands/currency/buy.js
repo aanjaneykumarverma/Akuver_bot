@@ -13,6 +13,7 @@ module.exports = {
     const guildId = message.guild.id;
     const userId = user.id;
     const doc = await factory.getOne(inventorySchema, { guildId, userId });
+    const coins = await currency.getCoins(guildId, userId);
     if (!doc) await factory.createOne(inventorySchema, { guildId, userId });
     if (!args) {
       return message.reply('Please specify something to buy!');
@@ -20,6 +21,8 @@ module.exports = {
     const item = args[0].toLowerCase();
     switch (item) {
       case 'vip':
+        if (coins < Vip)
+          return message.reply("You don't have enough money to buy this item!");
         await currency.addCoins(guildId, userId, -Vip);
         await factory.updateOne(
           inventorySchema,
@@ -35,6 +38,8 @@ module.exports = {
 
         break;
       case 'car':
+        if (coins < Car)
+          return message.reply("You don't have enough money to buy this item!");
         await currency.addCoins(guildId, userId, -Car);
         await factory.updateOne(
           inventorySchema,
@@ -50,6 +55,8 @@ module.exports = {
 
         break;
       case 'mansion':
+        if (coins < Mansion)
+          return message.reply("You don't have enough money to buy this item!");
         await currency.addCoins(guildId, userId, -Mansion);
         await factory.updateOne(
           inventorySchema,
@@ -65,6 +72,8 @@ module.exports = {
 
         break;
       case 'jetski':
+        if (coins < JetSki)
+          return message.reply("You don't have enough money to buy this item!");
         await currency.addCoins(guildId, userId, -JetSki);
         await factory.updateOne(
           inventorySchema,
