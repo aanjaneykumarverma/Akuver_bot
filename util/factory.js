@@ -20,7 +20,6 @@ exports.updateOne = async (Model, filter, data) => {
   try {
     const doc = await Model.findOneAndUpdate(filter, data, {
       new: true,
-      upsert: true,
       runValidators: true,
     });
     return doc;

@@ -1,3 +1,7 @@
 {
-  "prefix": "!"
+  "prefix": "!",
+  "Vip": 1000000,
+  "Car": 50000,
+  "Mansion": 100000,
+  "JetSki": 70000
 }

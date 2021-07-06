@@ -59,6 +59,11 @@ A cool multi purpose discord bot with commands for Fun, Moderation, Utility, Eco
 | Leaderboard | Displays the leaderboard (Top x)     | !leaderboard [x(Max 10)(optional)]  | !leaderboard 5        |
 | Transfer    | Transfers currency to mentioned user | !transfer [Currency][mention or id] | !transfer 500 @Akuver |
 | Roulette    | Play Roulette!                       | !roulette [Color][amount]           | !roulette blue 1000   |
+| Profile     | Displays the inventory of the user.  | !profile [Mention or ID(optional)]  | !profile @Akuver      |
+| Buy         | Buy something from the store!        | !buy [item]                         | !buy [mansion]        |
+| Sell        | Sell an item from your collection!   | !sell [item]                        | !sell [JetSki]        |
+| Slots       | Play Slots!                          | !slots [amount]                     | !slots 1000           |
+| Store       | Lists the items in store!            | !store                              | !store                |
 
 ## Misc
 

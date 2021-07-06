@@ -18,6 +18,10 @@ const profileSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  inventory: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'inventory',
+  },
 });
 
-module.exports = mongoose.model('profiles', profileSchema); // profiles is the table name
+module.exports = mongoose.model('profiles', profileSchema);
