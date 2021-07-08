@@ -10,7 +10,7 @@
   "author": "Akuver",
   "license": "ISC",
   "dependencies": {
-    "@discordjs/opus": "^0.3.3",
+    "@discordjs/opus": "^0.5.3",
     "canvas": "^2.7.0",
     "discord-image-generation": "^1.4.9",
     "discord-player": "^4.1.4",
