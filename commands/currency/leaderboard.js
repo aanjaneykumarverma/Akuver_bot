@@ -4,6 +4,7 @@ module.exports = {
   name: 'leaderboard',
   description: 'Displays the leaderboard (Top x)',
   usage: ' x(maximum 10)(optional)',
+  category: 'Currency',
   cooldown: 10,
   guildOnly: true,
   async execute(message, args) {

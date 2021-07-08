@@ -4,6 +4,7 @@ module.exports = {
   name: 'unmute',
   description: 'Unmutes a user.',
   usage: ' @user',
+  category: 'Moderation',
   permissions: 'ADMINISTRATOR',
   async: true,
   guildOnly: true,

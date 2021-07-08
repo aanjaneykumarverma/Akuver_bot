@@ -9,6 +9,7 @@ module.exports = {
   name: 'mute',
   description: 'Mutes a user',
   usage: ' @user reason',
+  category: 'Moderation',
   permissions: 'ADMINISTRATOR',
   async: true,
   guildOnly: true,

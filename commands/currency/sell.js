@@ -6,6 +6,7 @@ module.exports = {
   name: 'sell',
   description: 'Sell an item from your collection!',
   usage: ' [ITEM]',
+  category: 'Currency',
   guildOnly: true,
   async execute(message, args) {
     const user = message.author;

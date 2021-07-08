@@ -4,6 +4,7 @@ module.exports = {
   name: 'qr',
   description: 'Converts the provided link to a QR code',
   usage: ' Link(should be https) ',
+  category: 'Utility',
   execute(message, args) {
     let link = args[0];
     let qrLink = `http://api.qrserver.com/v1/create-qr-code/?data=${link}&size=200x200`;

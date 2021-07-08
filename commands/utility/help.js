@@ -4,10 +4,12 @@ module.exports = {
   name: 'help',
   description: 'lists all valid commands with their usage.',
   usage: ' ',
+  category: 'Utility',
   cooldown: 5,
   guildOnly: true,
   execute(message, args) {
     const data = [];
+    let commandsMap = {};
     const { commands } = message.client;
     const prefix_guild = prefix[message.guild.id.toString()]
       ? prefix[message.guild.id.toString()]
@@ -16,13 +18,13 @@ module.exports = {
       data.push('Here is a list of all of my commands:\n');
       for (let command of commands) {
         command = command[1];
+        if (!commandsMap[command.category]) commandsMap[command.category] = [];
         let permissions = command.permissions || '';
         if (permissions) {
           let hasPermission = true;
           if (typeof permissions === 'string') {
             permissions = permissions.split(',');
           }
-          console.log(permissions);
           for (const permission of permissions) {
             if (!message.member.hasPermission(permission)) {
               hasPermission = false;
@@ -34,13 +36,17 @@ module.exports = {
           }
         }
         const mainCommand = command.name;
-        const usage = command.usage ? `${command.usage}` : '';
-        const { description } = command;
-        data.push(`${prefix_guild}${mainCommand}${usage} = ${description}\n`);
+        const commandInfo = `${prefix_guild}${mainCommand}`;
+        commandsMap[command.category].push(commandInfo);
+      }
+      for (const category in commandsMap) {
+        data.push(`\n*****${category}*****\n`);
+        for (const command of commandsMap[category]) data.push(`${command}\n`);
       }
       data.push(
         `\nYou can send \`${prefix_guild}help command_name\` to get info on a specific command!`
       );
+
       return message.author
         .send(data, { split: true, code: true })
         .then(() => {

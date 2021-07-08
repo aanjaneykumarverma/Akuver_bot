@@ -4,6 +4,7 @@ module.exports = {
   name: 'userinfo',
   description: 'Displays information about the user.',
   usage: ' @member(optional)',
+  category: 'Misc',
   guildOnly: true,
   execute(message) {
     const { guild, channel } = message;

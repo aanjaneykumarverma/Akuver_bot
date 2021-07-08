@@ -2,6 +2,7 @@ module.exports = {
   name: 'giverole',
   description: 'Give a role to the specified user',
   usage: ' @Member <Role>',
+  category: 'Moderation',
   permissions: 'ADMINISTRATOR',
   guildOnly: true,
   execute(message, args) {

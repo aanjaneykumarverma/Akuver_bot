@@ -3,6 +3,7 @@ module.exports = {
   name: 'servericon',
   description: 'Displays the server icon!',
   usage: ' ',
+  category: 'Image',
   cooldown: 8,
   guildOnly: true,
   execute(message, args) {

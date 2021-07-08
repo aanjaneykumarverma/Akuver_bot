@@ -5,6 +5,7 @@ module.exports = {
   name: 'profile',
   description: 'Displays the inventory of the user.',
   usage: ' @member[optional]',
+  category: 'Currency',
   guildOnly: true,
   async execute(message, args) {
     const target = message.mentions.users.first() || message.author;

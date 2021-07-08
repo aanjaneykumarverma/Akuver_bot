@@ -7,6 +7,7 @@ module.exports = {
   name: 'slots',
   description: 'Play Slots!',
   usage: ' <Amount>',
+  category: 'Currency',
   guildOnly: true,
   async execute(message, args) {
     const user = message.author;

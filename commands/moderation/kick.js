@@ -2,6 +2,7 @@ module.exports = {
   name: 'kick',
   description: 'Kicks the specified user from the server.',
   usage: ' @user',
+  category: 'Moderation',
   permissions: 'ADMINISTRATOR,KICK_MEMBERS',
   guildOnly: true,
   execute(message, args) {

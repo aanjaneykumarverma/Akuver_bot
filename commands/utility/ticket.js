@@ -25,6 +25,7 @@ module.exports = {
   name: 'ticket',
   description: 'Issue a ticket for some problem.',
   usage: ' message ',
+  category: 'Utility',
   guildOnly: true,
   execute(message, args) {
     const { guild, member, client } = message;

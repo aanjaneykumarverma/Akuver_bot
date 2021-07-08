@@ -6,6 +6,7 @@ module.exports = {
   name: 'weather',
   description: 'Provides the weather of the city.',
   usage: ' city_name',
+  category: 'Misc',
   cooldown: 5,
   async execute(message, args) {
     const city = args[0];

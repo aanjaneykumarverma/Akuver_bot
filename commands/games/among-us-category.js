@@ -5,6 +5,7 @@ module.exports = {
   name: 'aucatset',
   description: 'Sets a category for Among Us voice channel.',
   usage: ' categoryName',
+  category: 'Games',
   guildOnly: true,
   permissions: 'ADMINISTRATOR',
   async execute(message, args) {

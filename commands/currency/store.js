@@ -4,6 +4,7 @@ module.exports = {
   name: 'store',
   description: 'Lists the items in store!',
   usage: ' ',
+  category: 'Currency',
   guildOnly: true,
   execute(message, args) {
     let text = [];

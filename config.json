@@ -3,5 +3,25 @@
   "Vip": 1000000,
   "Car": 50000,
   "Mansion": 100000,
-  "JetSki": 70000
+  "JetSki": 70000,
+  "filters": [
+    "8D",
+    "gate",
+    "haas",
+    "phaser",
+    "treble",
+    "tremolo",
+    "vibrato",
+    "reverse",
+    "karaoke",
+    "flanger",
+    "mcompand",
+    "pulsator",
+    "subboost",
+    "bassboost",
+    "vaporwave",
+    "nightcore",
+    "normalizer",
+    "surrounding"
+  ]
 }

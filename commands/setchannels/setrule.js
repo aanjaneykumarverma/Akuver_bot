@@ -5,6 +5,7 @@ const factory = require('../../util/factory');
 module.exports = {
   name: 'setrule',
   description: 'Sets(changes) the rules and info channel for this server',
+  category: 'SetChannels',
   permissions: 'ADMINISTRATOR',
   cooldown: 20,
   usage: ' Channel tag',

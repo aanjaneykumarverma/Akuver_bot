@@ -4,6 +4,7 @@ module.exports = {
   name: 'transfer',
   description: 'Transfers currency to mentioned user',
   usage: ' currency @member',
+  category: 'Currency',
   cooldown: 10,
   guildOnly: true,
   async execute(message, args) {

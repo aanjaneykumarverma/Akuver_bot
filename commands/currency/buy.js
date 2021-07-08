@@ -7,6 +7,7 @@ module.exports = {
   name: 'buy',
   description: 'Buy something from the store!',
   usage: ' [ITEM]',
+  category: 'Currency',
   guildOnly: true,
   async execute(message, args) {
     const user = message.author;

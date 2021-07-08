@@ -4,6 +4,7 @@ module.exports = {
   name: 'botinfo',
   description: 'Displays information about the bot',
   usage: ' ',
+  category: 'Misc',
   guildOnly: true,
   execute(message) {
     const embed = new Discord.MessageEmbed()

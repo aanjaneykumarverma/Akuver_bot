@@ -5,6 +5,7 @@ module.exports = {
   name: 'affect',
   description: "Converts a user's avatar in affect my baby meme !!",
   usage: ' @user',
+  category: 'Image',
   cooldown: 8,
   guildOnly: true,
   async execute(message, args) {

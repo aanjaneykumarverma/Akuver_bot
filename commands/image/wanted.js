@@ -5,6 +5,7 @@ module.exports = {
   name: 'wanted',
   description: "Converts a user's avatar in wanted meme !!",
   usage: ' @user',
+  category: 'Image',
   cooldown: 8,
   guildOnly: true,
   async execute(message, args) {

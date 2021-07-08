@@ -5,6 +5,7 @@ const factory = require('../../util/factory');
 module.exports = {
   name: 'setticket',
   description: 'Sets(changes) the ticket channel for this server',
+  category: 'SetChannels',
   permissions: 'ADMINISTRATOR',
   cooldown: 20,
   usage: ' Channel tag',

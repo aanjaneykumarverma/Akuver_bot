@@ -7,6 +7,7 @@ module.exports = {
   name: 'joke',
   description: 'Shares a joke.',
   usage: ' ',
+  category: 'Fun',
   async execute(message, args) {
     const Joke = await fetch(
       `${baseURL}/joke/${categories.join(',')}?${params.join('&')}`

@@ -7,6 +7,7 @@ module.exports = {
   name: 'au',
   description: 'Makes it easier to play among us with friends.',
   usage: ' <Region> <Code> ',
+  category: 'Games',
   guildOnly: true,
   async execute(message, args) {
     const [region, code] = args;

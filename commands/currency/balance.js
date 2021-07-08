@@ -4,6 +4,7 @@ module.exports = {
   name: 'bal',
   description: 'Returns the balance of the user.',
   usage: ' @member(optional)',
+  category: 'Currency',
   cooldown: 5,
   guildOnly: true,
   async execute(message, args) {

@@ -4,6 +4,7 @@ module.exports = {
   name: 'ttt',
   description: 'Play tic tac toe with the mentioned user!',
   usage: ' @user',
+  category: 'Games',
   guildOnly: true,
   async execute(message, args) {
     const user = message.mentions.members.first();

@@ -5,6 +5,7 @@ module.exports = {
   name: 'slap',
   description: 'Posts you slapping the mentioned user',
   usage: ' @user',
+  category: 'Image',
   cooldown: 8,
   guildOnly: true,
   async execute(message, args) {

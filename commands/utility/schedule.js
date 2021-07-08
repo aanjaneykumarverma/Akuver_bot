@@ -7,6 +7,7 @@ module.exports = {
   name: 'schedule',
   description: 'Schedules a message.',
   usage: ' <Channel tag> <YYYY/MM/DD> <HH:MM> <"AM" or "PM"> <Timezone>',
+  category: 'Utility',
   permissions: 'ADMINISTRATOR',
   guildOnly: true,
   async: true,

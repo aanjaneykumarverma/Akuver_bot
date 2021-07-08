@@ -5,6 +5,7 @@ module.exports = {
   name: 'roulette',
   description: 'Play roulette!',
   usage: ' <Colour> <Amount>',
+  category: 'Currency',
   guildOnly: true,
   async execute(message, args) {
     const user = message.author;

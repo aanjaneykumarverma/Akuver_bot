@@ -6,6 +6,7 @@ module.exports = {
   description:
     'Gives you the meaning of the word or the phrase using urban dictionary',
   usage: ' word_or_phrase',
+  category: 'Misc',
   async execute(message, args) {
     if (!args.length) {
       return message.reply('You need to supply a search term.');

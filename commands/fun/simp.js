@@ -2,6 +2,7 @@ module.exports = {
   name: 'simp',
   description: 'Gives the simprate of the user!',
   usage: ' @user',
+  category: 'Fun',
   guildOnly: true,
   execute(message, args) {
     const target = message.mentions.users.first();

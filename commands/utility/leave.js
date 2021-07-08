@@ -4,6 +4,7 @@ module.exports = {
   name: 'leave',
   description: 'Leaves the server!',
   usage: ' ',
+  category: 'Utility',
   permissions: 'ADMINISTRATOR',
   guildOnly: true,
   execute(message, args) {

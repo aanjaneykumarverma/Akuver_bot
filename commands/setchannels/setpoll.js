@@ -5,6 +5,7 @@ const factory = require('../../util/factory');
 module.exports = {
   name: 'setpoll',
   description: 'Sets(changes) the polls channel for this server',
+  category: 'SetChannels',
   permissions: 'ADMINISTRATOR',
   usage: ' Channel tag',
   cooldown: 20,

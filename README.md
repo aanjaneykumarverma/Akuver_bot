@@ -103,3 +103,22 @@ A cool multi purpose discord bot with commands for Fun, Moderation, Utility, Eco
 | Tictactoe       | Play Tic-tac-toe with the mentioned user       | !ttt [Mention or ID]      | !ttt @Akuver   |
 | AmongUsCategory | Sets a category for Among Us voice channel.    | !aucatset [Category Name] | !aucatset hola |
 | AmongUs         | Makes it easier to play among us with friends. | !au [Region][code]        | !au US 223344  |
+
+## Music
+
+| Name       | Description                                     | Usage                 | Example                      |
+| ---------- | ----------------------------------------------- | --------------------- | ---------------------------- |
+| ClearQueue | Clears the music queue!                         | !clearqueue           | !clearqueue                  |
+| Filter     | Apply a filter to the music!                    | !filter [Filter Name] | !filter 8D                   |
+| Filters    | Get a list of all filters!                      | !filters              | !filters                     |
+| Loop       | Enable/Disable repeat of current song/queue!    | !loop [queue/song]    | !loop song                   |
+| NowPlaying | See music in progress                           | !nowplaying           | !nowplaying                  |
+| Pause      | Pause the music!                                | !pause                | !pause                       |
+| Play       | Play the mentioned song/music!                  | !play [name/URL]      | !play Hymn for the weekend   |
+| Queue      | See the next songs                              | !queue                | !queue                       |
+| Resume     | Resume music!                                   | !resume               | !resume                      |
+| Search     | Open a panel to choose a music and then play it | !search [name/URL]    | !search Hymn for the weekend |
+| Shuffle    | Shuffle the queue                               | !shuffle              | !shuffle                     |
+| Skip       | Skip the current song                           | !skip                 | !skip                        |
+| Stop       | Stop all music!                                 | !stop                 | !stop                        |
+| Volume     | Set the volume!                                 | !volume [1-100]       | !volume 75                   |
