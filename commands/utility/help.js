@@ -40,6 +40,7 @@ module.exports = {
         commandsMap[command.category].push(commandInfo);
       }
       for (const category in commandsMap) {
+        if (!commandsMap[category].length) continue;
         data.push(`\n*****${category}*****\n`);
         for (const command of commandsMap[category]) data.push(`${command}\n`);
       }

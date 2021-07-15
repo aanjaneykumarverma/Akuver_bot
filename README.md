@@ -11,13 +11,14 @@ A cool multi purpose discord bot with commands for Fun, Moderation, Utility, Eco
 
 ## Moderation
 
-| Name     | Description                       | Usage                            | Example                    |
-| -------- | --------------------------------- | -------------------------------- | -------------------------- |
-| GiveRole | Give a role to the specified user | !giverole [Mention or ID ][role] | !giverole @Akuver Verified |
-| Ban      | Bans a user from the server       | !ban [Mention or ID]             | !ban @Akuver               |
-| Kick     | Kicks a user from the server      | !kick [Mention or ID]            | !kick @Akvuer              |
-| Mute     | Mutes a user in the server        | !mute [Mention or ID][reason]    | !mute @Akuver spamming     |
-| Unmute   | Unmutes a user in the server      | !unmute [Mention or ID ]         | !unmute @Akuver            |
+| Name       | Description                           | Usage                              | Example                      |
+| ---------- | ------------------------------------- | ---------------------------------- | ---------------------------- |
+| GiveRole   | Give a role to the specified user     | !giverole [Mention or ID ][role]   | !giverole @Akuver Verified   |
+| RemoveRole | Remove a role from the specified user | !removerole [Mention or ID ][role] | !removerole @Akuver Verified |
+| Ban        | Bans a user from the server           | !ban [Mention or ID]               | !ban @Akuver                 |
+| Kick       | Kicks a user from the server          | !kick [Mention or ID]              | !kick @Akvuer                |
+| Mute       | Mutes a user in the server            | !mute [Mention or ID][reason]      | !mute @Akuver spamming       |
+| Unmute     | Unmutes a user in the server          | !unmute [Mention or ID ]           | !unmute @Akuver              |
 
 ## Fun
 
