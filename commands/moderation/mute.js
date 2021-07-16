@@ -1,4 +1,5 @@
 const muteSchema = require('../../schemas/mute-schema');
+const factory = require('../../util/factory');
 
 const reasons = {
   SPAMMING: 5,
@@ -36,59 +37,70 @@ module.exports = {
       );
       return;
     }
-    try {
-      const previousMutes = await muteSchema.find({
-        userId: target.id,
-      });
-      console.log(previousMutes);
-      const currentlyMuted = previousMutes.filter((mute) => {
-        return mute.current === true;
-      });
-      console.log(currentlyMuted);
-      if (currentlyMuted.length) {
-        message.reply('That user is already muted.');
-        return;
+
+    const previousMute = await factory.getOne(muteSchema, {
+      userId: target.id,
+    });
+
+    console.log(previousMute);
+
+    const currentlyMuted = previousMute ? previousMute.current : false;
+    const muteCount = previousMute ? previousMute.timesMuted : 0;
+
+    console.log(currentlyMuted);
+    if (currentlyMuted) return message.reply('That user is already muted.');
+
+    let duration = reasons[reason] * (muteCount + 1);
+    const expires = new Date();
+    expires.setHours(expires.getHours() + duration);
+    const mutedRole = guild.roles.cache.find((role) => {
+      return role.name === 'Muted';
+    });
+
+    if (!mutedRole) return message.reply('Could not find a "Muted" role.');
+
+    const targetMember = (await guild.members.fetch()).get(target.id);
+    let curRoles = '';
+    guild.roles.cache.find((role) => {
+      if (
+        role.name !== 'Muted' &&
+        role.name !== '@everyone' &&
+        targetMember.roles.cache.has(role.id)
+      ) {
+        curRoles += `${role.name},`;
+        targetMember.roles.remove(role);
       }
-      let duration = reasons[reason] * (previousMutes.length + 1);
-      const expires = new Date();
-      expires.setHours(expires.getHours() + duration);
-      const mutedRole = guild.roles.cache.find((role) => {
-        return role.name === 'Muted';
-      });
-      if (!mutedRole) {
-        message.reply('Could not find a "Muted" role.');
-        return;
-      }
-      const targetMember = (await guild.members.fetch()).get(target.id);
-      let curRoles = '';
-      guild.roles.cache.find((role) => {
-        if (
-          role.name !== 'Muted' &&
-          role.name !== '@everyone' &&
-          targetMember.roles.cache.has(role.id)
-        ) {
-          curRoles += `${role.name} ,`;
-          targetMember.roles.remove(role);
-        }
-      });
-      curRoles = curRoles.substr(0, curRoles.length - 2);
-      targetMember.roles.add(mutedRole);
-      await new muteSchema({
-        userId: target.id,
-        guildId: guild.id,
-        reason,
-        staffId: staff.id,
-        staffTag: staff.username,
-        curRoles,
-        expires,
-        current: true,
-      }).save();
-      message.reply(
-        `You muted <@${target.id}> for "${reason}". They will be unmuted in ${duration} hours.`
+    });
+    curRoles = curRoles.substr(0, curRoles.length - 1);
+    targetMember.roles.add(mutedRole);
+
+    const data = {
+      userId: target.id,
+      guildId: guild.id,
+      reason,
+      staffId: staff.id,
+      staffTag: staff.username,
+      curRoles,
+      expires,
+      current: true,
+      timesMuted: muteCount + 1,
+    };
+
+    if (!previousMute) {
+      await factory.createOne(muteSchema, data);
+    } else {
+      await factory.updateOne(
+        muteSchema,
+        {
+          guildId: guild.id,
+          userId: target.id,
+        },
+        data
       );
-    } catch (err) {
-      console.log(err.message);
-      throw err;
     }
+
+    message.reply(
+      `You muted <@${target.id}> for "${reason}". They will be unmuted in ${duration} hours.`
+    );
   },
 };

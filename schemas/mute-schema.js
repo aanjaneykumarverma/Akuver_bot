@@ -24,6 +24,10 @@ const muteSchema = mongoose.Schema(
       type: Boolean,
       required: true,
     },
+    timesMuted: {
+      type: Number,
+      default: 1,
+    },
   },
   {
     timestamps: true,
