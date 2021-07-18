@@ -17,7 +17,7 @@ const muteSchema = mongoose.Schema(
       default: '',
     },
     expires: {
-      type: Date,
+      type: Number,
       required: true,
     },
     current: {

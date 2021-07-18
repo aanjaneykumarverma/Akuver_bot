@@ -54,3 +54,12 @@ exports.deleteOne = async (Model, filter) => {
     console.error(err);
   }
 };
+
+exports.deleteAll = async (Model, filter) => {
+  try {
+    const docs = await Model.deleteMany(filter);
+    return docs;
+  } catch (err) {
+    console.error(err);
+  }
+};

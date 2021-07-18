@@ -51,8 +51,9 @@ module.exports = {
     if (currentlyMuted) return message.reply('That user is already muted.');
 
     let duration = reasons[reason] * (muteCount + 1);
-    const expires = new Date();
+    let expires = new Date();
     expires.setHours(expires.getHours() + duration);
+    expires = expires.valueOf();
     const mutedRole = guild.roles.cache.find((role) => {
       return role.name === 'Muted';
     });
