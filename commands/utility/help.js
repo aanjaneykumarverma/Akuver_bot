@@ -69,10 +69,10 @@ module.exports = {
     }
 
     data.push(`Name: ${command.name}`);
+    data.push(`Category : ${command.category}`);
     if (command.description) data.push(`Description: ${command.description}`);
     if (command.usage)
       data.push(`Usage: ${prefix_guild}${command.name} ${command.usage}\n`);
-
     data.push(`Cooldown: ${command.cooldown || 3}second(s)`);
     message.channel.send(data, { split: true });
   },
