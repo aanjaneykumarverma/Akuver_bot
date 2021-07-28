@@ -1,8 +1,9 @@
 const { prefix } = require('../config');
+const { loadData } = require('../util/update');
 
 module.exports = {
   name: 'guildCreate',
-  execute(guild, client) {
+  async execute(guild, client) {
     const data = [];
     data.push(
       `Hello, I'm Akuver Bot! Thanks for inviting me.\nPlease send ${prefix}help to get a list of my commands.\n`
@@ -16,11 +17,12 @@ module.exports = {
     data.push('Rules & Info channel: Use setrule command for this.\n');
     data.push('Role Claim channel: Use setrole command for this.\n');
     data.push('Polls channel: Use setpoll command for this.\n');
-    data.push('Tickets channel: Use ticket command for this.\n');
+    data.push('Tickets channel: Use setticket command for this.\n');
     data.push('Levels channel: Use setlevel command for this.\n');
     data.push(
       'Please note that setting up these details is completely optional.\nHowever, certain features might not work if the corresponding details are missing.\n'
     );
     guild.owner.send(data, { code: true });
+    await loadData(client);
   },
 };

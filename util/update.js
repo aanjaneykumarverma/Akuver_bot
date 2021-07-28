@@ -1,5 +1,5 @@
 const guildSchema = require('../schemas/guild-schema');
-const { deleteOne } = require('./factory');
+const { deleteOne, getOne, createOne } = require('./factory');
 const { prefix } = require('../config.json');
 const guildPrefixes = {};
 const guildWelcomes = {};
@@ -11,36 +11,20 @@ const guildLeaves = {};
 const guildLevels = {};
 
 module.exports.loadData = async (client) => {
-  try {
-    for (const guild of client.guilds.cache) {
-      const guildId = guild[1].id;
-      let result = await guildSchema.findOne({ _id: guildId });
-      if (!result) {
-        result = await guildSchema.findOneAndUpdate(
-          {
-            _id: guildId,
-          },
-          {
-            _id: guildId,
-            prefix: prefix,
-          },
-          {
-            upsert: true, //update+insert
-            new: true, // return the updated value; not the old one.
-          }
-        );
-      }
-      guildPrefixes[guildId] = result.prefix;
-      guildWelcomes[guildId] = result.welcome;
-      guildRules[guildId] = result.rules;
-      guildRoles[guildId] = result.role;
-      guildTickets[guildId] = result.ticket;
-      guildPolls[guildId] = result.polls;
-      guildLeaves[guildId] = result.leave;
-      guildLevels[guildId] = result.level;
-    }
-  } catch (err) {
-    console.log(err, 'ERROR!');
+  for (const guild of client.guilds.cache) {
+    const guildId = guild[1].id;
+    let result = await getOne(guildSchema, { _id: guildId });
+    if (!result)
+      result = await createOne(guildSchema, { _id: guildId, prefix });
+
+    guildPrefixes[guildId] = result.prefix;
+    guildWelcomes[guildId] = result.welcome;
+    guildRules[guildId] = result.rules;
+    guildRoles[guildId] = result.role;
+    guildTickets[guildId] = result.ticket;
+    guildPolls[guildId] = result.polls;
+    guildLeaves[guildId] = result.leave;
+    guildLevels[guildId] = result.level;
   }
 };
 
