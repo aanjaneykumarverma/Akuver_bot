@@ -33,7 +33,7 @@ module.exports.updateCache = (guildId, command, data) => {
     guildPrefixes[guildId] = data;
   } else if (command === 'setwelcome') {
     guildWelcomes[guildId] = data;
-  } else if (command === ' setrule') {
+  } else if (command === 'setrule') {
     guildRules[guildId] = data;
   } else if (command === 'setrole') {
     guildRoles[guildId] = data;
