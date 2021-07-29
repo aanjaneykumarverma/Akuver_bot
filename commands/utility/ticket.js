@@ -29,7 +29,10 @@ module.exports = {
   guildOnly: true,
   execute(message, args) {
     const { guild, member, client } = message;
-    if (typeof ticket[guild.id.toString()] === 'undefined') return;
+    if (!ticket[guild.id.toString()])
+      return message.reply(
+        'Ticket channel is not set in this server! Ask Admin to set one.'
+      );
     const channelId = ticket[guild.id.toString()];
     registerEvent(client, channelId);
     const channel = guild.channels.cache.get(channelId);

@@ -13,23 +13,24 @@ module.exports = {
     let win = false;
     let [colour, amount] = args;
     const random = Math.floor(Math.random() * 111);
-    if (!colour || !valid.includes(colour))
+    if (!colour)
       return message.reply(
-        'Please select a colour. Red [2x] Green [4x] Blue [15x]'
+        'Please select a colour. Red [4x] Green [8x] Blue [15x]'
       );
-
+    colour = colour.toLowerCase();
+    if (!valid.includes(colour))
+      return message.reply('Please select a valid colour.(Red, Green, Blue)');
     if (!amount) return message.reply('Please specify an amount to gamble.');
     const currentAmount = await currency.getCoins(message.guild.id, user.id);
     if (amount > currentAmount)
       return message.reply('You are not capable of betting that much!');
 
-    colour = colour.toLowerCase();
     if (colour.startsWith('r')) {
       colour = 0;
-      multiplier = 2;
+      multiplier = 4;
     } else if (colour.startsWith('g')) {
       colour = 1;
-      multiplier = 4;
+      multiplier = 8;
     } else if (colour.startsWith('b')) {
       colour = 2;
       multiplier = 15;

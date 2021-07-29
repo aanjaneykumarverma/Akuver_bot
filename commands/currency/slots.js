@@ -13,6 +13,7 @@ module.exports = {
     const user = message.author;
     let win = false;
     let numbers = [];
+    let numbersOld = [];
     let multiplier = 0;
     let amount = args[0];
     if (!amount) return message.reply('Please specify an amount to gamble.');
@@ -21,17 +22,18 @@ module.exports = {
       return message.reply('You are not capable of betting that much!');
     for (i = 0; i < 3; i++) {
       numbers[i] = Math.floor(Math.random() * slotItems.length);
+      numbersOld[i] = numbers[i];
     }
     numbers = numbers.sort();
     if (numbers[0] == numbers[2]) {
       multiplier = 9;
       win = true;
     } else if (numbers[0] == numbers[1] || numbers[1] == numbers[2]) {
-      multiplier = 2;
+      multiplier = 3;
       win = true;
     }
     amount *= multiplier - 1;
-    await currency.addCoins(message.guild.id, user.id, -amount);
+    await currency.addCoins(message.guild.id, user.id, amount);
     const text = win
       ? 'Congratulations!! You won!'
       : 'You lost! Better luck next time';
@@ -43,8 +45,8 @@ module.exports = {
       .setColor('#0099ff')
       .setTitle(text)
       .setDescription(
-        `${slotItems[numbers[0]]} | ${slotItems[numbers[1]]} | ${
-          slotItems[numbers[2]]
+        `${slotItems[numbersOld[0]]} | ${slotItems[numbersOld[1]]} | ${
+          slotItems[numbersOld[2]]
         }`
       )
       .addFields(

@@ -16,9 +16,7 @@ module.exports = {
     const doc = await factory.getOne(inventorySchema, { guildId, userId });
     const coins = await currency.getCoins(guildId, userId);
     if (!doc) await factory.createOne(inventorySchema, { guildId, userId });
-    if (!args) {
-      return message.reply('Please specify something to buy!');
-    }
+    if (!args[0]) return message.reply('Please specify something to buy!');
     const item = args[0].toLowerCase();
     switch (item) {
       case 'vip':

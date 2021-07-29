@@ -19,7 +19,7 @@ module.exports = {
       return channel.send(`No music currently playing!`);
 
     if (!args[0] || isNaN(args[0]) || args[0] === 'Infinity')
-      return channel.send(`Please enter a valid number!`);
+      return channel.send(`Please enter a valid number (between 1 and 100)!`);
 
     if (
       Math.round(parseInt(args[0])) < 1 ||
