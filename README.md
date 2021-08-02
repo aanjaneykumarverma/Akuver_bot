@@ -43,15 +43,17 @@ A cool multi purpose discord bot with commands for Fun, Moderation, Utility, Eco
 
 ## Image
 
-| Name       | Description                                   | Usage                             | Example         |
-| ---------- | --------------------------------------------- | --------------------------------- | --------------- |
-| Avatar     | Sends the avatar of the mentioned user        | !avatar [Mention or ID(optional)] | !avatar @Akuver |
-| ServerIcon | Sends the servericon                          | !servericon                       | !servericon     |
-| Affect     | Send the user's avatar in affect my baby meme | !affect [user]                    | !affect @Akuver |
-| Stonk      | Send the user's avatar in stonks meme         | !stonk [user]                     | !stonk @Akuver  |
-| Slap       | Slaps the user                                | !slap [user]                      | !slap @Akuver   |
-| Wanted     | Put the user in the wanted meme               | !wanted [user]                    | !wanted @Akuver |
-| Trash      | Send the user's avatar in trash meme          | !trash [user]                     | !trash @Akuver  |
+| Name          | Description                                   | Usage                                      | Example                   |
+| ------------- | --------------------------------------------- | ------------------------------------------ | ------------------------- |
+| Avatar        | Sends the avatar of the mentioned user        | !avatar [Mention or ID(optional)]          | !avatar @Akuver           |
+| ServerIcon    | Sends the servericon                          | !servericon                                | !servericon               |
+| Affect        | Send the user's avatar in affect my baby meme | !affect [user]                             | !affect @Akuver           |
+| Stonk         | Send the user's avatar in stonks meme         | !stonk [user]                              | !stonk @Akuver            |
+| Slap          | Slaps the user                                | !slap [user]                               | !slap @Akuver             |
+| Wanted        | Put the user in the wanted meme               | !wanted [user]                             | !wanted @Akuver           |
+| Trash         | Send the user's avatar in trash meme          | !trash [user]                              | !trash @Akuver            |
+| Meme          | Make a meme, using a variety of templates     | !meme [template][top_text] - [Bottom_Text] | !meme office Top - Bottom |
+| MemeTemplates | Get a list of all meme templates              | !memetemp                                  | !memetemp                 |
 
 ## Currency
 
