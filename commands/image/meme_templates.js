@@ -29,7 +29,7 @@ module.exports = {
   name: 'memetemp',
   description: 'Get a list of all meme templates',
   usage: ' ',
-  category: 'image',
+  category: 'Image',
   guildOnly: true,
   execute(message, args) {
     const meme_templates = Object.keys(meme_dict).join(', ');
